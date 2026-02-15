@@ -47,3 +47,32 @@ Ele serve para continuidade entre sessões/máquinas e para evitar alterações 
 Checklist:
 - Arquivos alterados: `scripts/optimize_logo.py`, `public/images/logo-comunidade.webp`, `index.html`, `PROJECT_LOG.md`
 - PROJECT_LOG.md atualizado: sim
+
+### [2026-02-15 19:22] — Correção: Caminho do Logo e Gitignore
+
+**Pedido do usuário (1–3 bullets):**
+- Corrigir imagem do logo que não estava carregando (quebrada).
+- Adicionar pasta `.agent` ao `.gitignore` (mencionado em arquivo temporário).
+
+**O que foi feito (mudanças reais):**
+- `index.html` — Corrigido caminho da imagem de `images/...` para `public/images/...` (para funcionar via file system/path relativo correto).
+- `.gitignore` — Verificado (já continha a regra para ignorar `.agent/`).
+- `.gitpy` — [DELETE] Removido arquivo que continha apenas o texto do pedido do usuário.
+
+**Como foi feito (método):**
+- Ajuste manual de path no HTML.
+- Comando `del` para remover arquivo de texto solto.
+
+**Skills usadas (somente as realmente usadas):**
+- nenhuma
+
+**Avisos / Não mexer sem necessidade:**
+- O caminho `public/images/` funciona bem quando se abre o HTML direto ou em servidores simples. Se usar build process que "arranca" a pasta public, pode precisar reverter, mas o cenário atual parece ser uso direto.
+
+**Pendências / Próximos passos (opcional):**
+- Testar visualização.
+
+## Checklist obrigatório de fechamento (sempre no fim da resposta)
+Checklist:
+- Arquivos alterados: `index.html`, `.gitpy` (removido), `PROJECT_LOG.md`
+- PROJECT_LOG.md atualizado: sim
