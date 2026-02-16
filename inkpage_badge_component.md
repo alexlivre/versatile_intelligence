@@ -1,6 +1,6 @@
-# Inkpage Agency Badge Component (V2 - Premium)
+# Inkpage Agency Badge Component (V3 - Premium Gradient)
 
-Este componente foi desenhado para destacar a autoria digital de forma elegante e não-intrusiva, utilizando efeitos visuais premium para reforçar a percepção de qualidade da marca.
+Este componente foi desenhado para destacar a autoria digital com sofisticação. Ele inclui efeitos de brilho (shine), sombras coloridas e texto com gradiente interativo.
 
 ## 🛠️ Instalação
 
@@ -9,7 +9,7 @@ Copie e cole o código abaixo no rodapé (`<footer>`) ou na seção de créditos
 **Dependências:** Tailwind CSS
 
 ```html
-<!-- Inkpage Agency Badge -->
+<!-- Agency Badge -->
 <a href="https://www.inkpage.com.br" target="_blank" rel="noopener"
   class="group relative flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50/50 hover:bg-white border border-slate-200/60 hover:border-purple-200/60 shadow-sm hover:shadow-lg hover:shadow-purple-100/50 transition-all duration-300 overflow-hidden">
 
@@ -21,7 +21,7 @@ Copie e cole o código abaixo no rodapé (`<footer>`) ou na seção de créditos
       class="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest group-hover:text-purple-600 transition-colors duration-300">
       Presença Digital
     </span>
-    <span class="font-display text-sm font-bold text-slate-700 group-hover:text-slate-900 leading-tight">
+    <span class="font-display text-sm font-bold text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-fuchsia-600 transition-all duration-300 leading-tight">
       Inkpage
     </span>
   </div>
@@ -34,26 +34,22 @@ Copie e cole o código abaixo no rodapé (`<footer>`) ou na seção de créditos
 </a>
 ```
 
----
+## ✨ Detalhes Técnicos dos Efeitos
 
-## ✨ Explicação do Efeito "Shine" (Shimmer)
+### 1. Shine Effect (Brilho)
+Uma `div` absoluta com gradiente transparente-branco-transparente que desliza da esquerda para a direita no hover, simulando reflexo de luz.
+- `absolute inset-0`: Cobre todo o card.
+- `-translate-x-full` → `group-hover:translate-x-full`: Animação de movimento.
 
-O efeito visual de brilho que percorre o card ao passar o mouse é conhecido tecnicamente como **Shine Effect** ou **Shimmer Effect**. Ele simula o reflexo de luz em uma superfície polida (como vidro ou metal).
+### 2. Gradient Text (Texto Inkpage)
+O texto "Inkpage" transita de uma cor sólida (Slate-700) para um gradiente vibrante (Purple → Fuchsia) no hover.
+- `bg-clip-text text-transparent`: Permite que o fundo gradiente preencha apenas as letras.
+- `bg-gradient-to-r from-purple-600 to-fuchsia-600`: As cores da marca.
 
-### Como funciona no código:
-
-1.  **Elemento Fantasma (`div` absoluta):**
-    Criamos uma `div` invisível que cobre toda a área do card (`absolute inset-0`), mas inicialmente posicionada fora da visão, à esquerda (`-translate-x-full`).
-
-2.  **O Gradiente de Luz:**
-    O fundo dessa div é um gradiente linear que vai de transparente p/ branco (60% opacidade) e volta para transparente. Isso cria a "faixa de luz".
-    `bg-gradient-to-r from-transparent via-white/60 to-transparent`
-
-3.  **A Animação (Hover):**
-    Quando o usuário passa o mouse (`group-hover`), o navegador move essa div suavemente para a direita (`translate-x-full`), criando a ilusão de que um feixe de luz atravessou o card.
-    
-    A transição dura 1 segundo (`duration-1000`) e tem suavização na entrada e saída (`ease-in-out`), garantindo um movimento orgânico e sofisticado.
+### 3. Logo Transition
+O logo começa discreto (cinza e opaco) e ganha vida no hover.
+- `grayscale` → `group-hover:grayscale-0`: Remove a saturação inicial.
+- `brightness-0 invert`: Torna o svg branco puro sobre o fundo colorido.
 
 ---
-
 **© Inkpage | Presença Digital**
