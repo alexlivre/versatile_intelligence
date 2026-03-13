@@ -74,83 +74,143 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
-      background: radial-gradient(circle at top left, #e0f2fe, #fdf4ff, #fae8ff);
+      background: radial-gradient(circle at top left, #f0f9ff, #fdf4ff, #fae8ff);
+      overflow: hidden;
+    }
+
+    /* Animated Grid Overlay */
+    .radiant-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 80%);
+      pointer-events: none;
     }
 
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.6;
+      filter: blur(80px);
+      opacity: 0.4;
       mix-blend-mode: multiply;
+      transition: transform 0.3s ease-out;
     }
 
     .orb-1 {
       top: -10%;
       left: -10%;
-      width: 40vw;
-      height: 40vw;
+      width: 50vw;
+      height: 50vw;
       background: #22d3ee;
-      animation: float-slow 10s infinite;
+      animation: float-slow 20s infinite alternate;
     }
 
-    /* Cyan */
     .orb-2 {
       top: 20%;
       right: -20%;
-      width: 50vw;
-      height: 50vw;
+      width: 60vw;
+      height: 60vw;
       background: #e879f9;
-      animation: float-fast 12s infinite;
+      animation: float-fast 25s infinite alternate-reverse;
     }
 
-    /* Magenta */
     .orb-3 {
       bottom: -20%;
       left: 30%;
-      width: 60vw;
-      height: 60vw;
+      width: 70vw;
+      height: 70vw;
       background: #818cf8;
-      animation: float-slow 15s infinite;
+      animation: float-slow 30s infinite alternate;
     }
 
-    /* Violet */
+    /* Cursor Glow Effect */
+    .cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
 
     /* Holographic Card Effect */
     .holo-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow:
-        0 4px 6px -1px rgba(0, 0, 0, 0.05),
-        0 20px 25px -5px rgba(0, 0, 0, 0.05),
-        inset 0 0 20px rgba(255, 255, 255, 0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+        0 4px 6px -1px rgba(0, 0, 0, 0.02),
+        0 10px 15px -3px rgba(0, 0, 0, 0.03),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .holo-card:hover {
-      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.82);
+      border-color: rgba(139, 92, 246, 0.3);
       box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 25px 30px -10px rgba(139, 92, 246, 0.15);
-      /* Violet glow */
+        0 20px 25px -5px rgba(139, 92, 246, 0.1),
+        0 10px 10px -5px rgba(139, 92, 246, 0.04);
+    }
+
+    /* Reveal on Scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Iridescent Text */
     .text-iridescent {
-      background: linear-gradient(135deg, #0891b2 0%, #7c3aed 50%, #db2777 100%);
+      background: linear-gradient(135deg, #0891b2 0%, #7c3aed 45%, #db2777 90%, #0891b2 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       background-size: 200% auto;
-      animation: shine 5s linear infinite;
+      animation: shine 8s linear infinite;
     }
 
     @keyframes shine {
       to {
         background-position: 200% center;
       }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
   </style>
 
@@ -164,6 +224,7 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
+  <div class="cursor-glow" id="cursor-glow"></div>
 
   <!-- Header -->
   <header class="fixed top-4 w-full z-50">
@@ -238,21 +299,21 @@
       </div>
 
       <!-- Visual Side (Abstract Representation) -->
-      <div class="md:col-span-5 relative hidden md:block">
+      <div class="md:col-span-5 relative hidden md:block reveal">
         <div class="relative w-full aspect-square">
           <div
             class="absolute inset-0 bg-gradient-to-tr from-cyan-400 via-fuchsia-400 to-yellow-300 rounded-full blur-2xl opacity-40 animate-pulse-glow">
           </div>
           <div
-            class="holo-card w-full h-full rounded-[2rem] flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500">
+            class="holo-card w-full h-full rounded-[2rem] flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500 tilt-element">
             <div class="text-center space-y-4">
-              <div class="text-6xl">✨</div>
+              <div class="text-6xl animate-bounce">✨</div>
               <h3 class="font-display text-2xl font-bold text-slate-800">Conhecimento <br> & Conexão</h3>
               <div class="flex justify-center -space-x-4">
                 <div class="w-12 h-12 rounded-full border-4 border-white bg-cyan-200"></div>
                 <div class="w-12 h-12 rounded-full border-4 border-white bg-fuchsia-200"></div>
                 <div
-                  class="w-12 h-12 rounded-full border-4 border-white bg-yellow-200 flex items-center justify-center font-bold text-xs">
+                  class="w-12 h-12 rounded-full border-4 border-white bg-yellow-200 flex items-center justify-center font-bold text-xs ring-2 ring-white">
                   +99</div>
               </div>
             </div>
@@ -262,7 +323,7 @@
     </div>
 
     <!-- Bento Grid Intro -->
-    <div class="text-center mb-12">
+    <div class="text-center mb-12 reveal">
       <h2 class="font-display text-3xl md:text-5xl font-bold text-slate-900">Juntos vamos mais longe</h2>
       <p class="text-slate-500 mt-4 max-w-2xl mx-auto">O conhecimento se multiplica quando é compartilhado.</p>
     </div>
@@ -271,7 +332,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(180px,auto)]">
 
       <!-- Big Card: Intro -->
-      <div class="holo-card rounded-3xl p-8 md:col-span-2 lg:col-span-2 flex flex-col justify-center">
+      <div class="holo-card rounded-3xl p-8 md:col-span-2 lg:col-span-2 flex flex-col justify-center reveal tilt-element">
         <h3 class="font-display text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
           <span class="text-3xl">🚀</span> Propósito
         </h3>
@@ -321,6 +382,69 @@
     </div>
 
   </main>
+
+  <script>
+    // Cursor Glow and Grid Interaction
+    const cursorGlow = document.getElementById('cursor-glow');
+    document.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      
+      // Update cursor glow position
+      cursorGlow.style.left = `${clientX}px`;
+      cursorGlow.style.top = `${clientY}px`;
+      cursorGlow.style.opacity = '1';
+
+      // Update grid mask position
+      const xPercent = (clientX / window.innerWidth) * 100;
+      const yPercent = (clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty('--mouse-x', `${xPercent}%`);
+      document.documentElement.style.setProperty('--mouse-y', `${yPercent}%`);
+
+      // Parallax Orbs
+      const orbs = document.querySelectorAll('.orb');
+      orbs.forEach((orb, index) => {
+        const speed = (index + 1) * 0.02;
+        const x = (window.innerWidth - clientX * speed) / 100;
+        const y = (window.innerHeight - clientY * speed) / 100;
+        orb.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+
+    // 3D Tilt Effect
+    const tiltElements = document.querySelectorAll('.tilt-element');
+    tiltElements.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (centerY - y) / 10;
+        const rotateY = (x - centerX) / 10;
+        
+        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      });
+    });
+
+    // Reveal on Scroll
+    const observerOptions = {
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 
   <footer class="mt-20 py-10 bg-white/60 backdrop-blur-md border-t border-white/50">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
