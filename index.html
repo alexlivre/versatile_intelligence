@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Comunidade de aprendizado e troca de conhecimentos sobre Inteligência Artificial. Junte-se ao grupo para aprender, ensinar e compartilhar experiências." />
+    content="Junte-se à maior comunidade brasileira de Inteligência Artificial. Aprenda, ensine e compartilhe conhecimento sobre IA, ChatGPT, Midjourney e mais. Grupo gratuito e inclusivo para todos os níveis." />
   <meta name="keywords"
-    content="Inteligência Artificial, Comunidade Tech, Aprendizado, ChatGPT, Midjourney, Grupo de Estudos, Tecnologia, Networking" />
+    content="Inteligência Artificial, IA, Comunidade Tech, Aprendizado IA, ChatGPT, Midjourney, Grupo de Estudos, Tecnologia, Networking, AI Brasil, Inteligência Artificial Brasil, Grupo WhatsApp IA" />
   <meta name="author" content="Inteligência Versátil" />
-  <title>Inteligência Versátil | Comunidade de IA & Aprendizado</title>
+  <title>Inteligência Versátil | Maior Comunidade de IA do Brasil | Aprenda IA Grátis</title>
 
   <!-- Google Fonts: Space Grotesk (Tech/Modern) & Inter (Clean) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -212,9 +212,137 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      .holo-card {
+        transition: all 0.3s ease;
+      }
+      
+      .tilt-element {
+        transform: none !important;
+      }
+      
+      .tilt-element:hover {
+        transform: none !important;
+      }
+      
+      /* Better touch targets */
+      button, a {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      .faq-toggle {
+        padding: 1rem;
+      }
+      
+      /* Reduce motion for mobile */
+      .orb {
+        animation-duration: 30s;
+      }
+      
+      .cursor-glow {
+        display: none;
+      }
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .holo-card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #000;
+      }
+      
+      .text-slate-600 {
+        color: #000;
+      }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 
   <link rel="icon" type="image/png" href="public/images/logo-comunidade.webp" />
+  <link rel="canonical" href="https://versatile-intelligence.vercel.app/" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://versatile-intelligence.vercel.app/" />
+  <meta property="og:title" content="Inteligência Versátil | Maior Comunidade de IA do Brasil" />
+  <meta property="og:description" content="Junte-se à maior comunidade brasileira de Inteligência Artificial. Aprenda, ensine e compartilhe conhecimento sobre IA, ChatGPT, Midjourney e mais. Grupo gratuito e inclusivo." />
+  <meta property="og:image" content="https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp" />
+  <meta property="og:image:alt" content="Logo da comunidade Inteligência Versátil" />
+  <meta property="og:site_name" content="Inteligência Versátil" />
+  <meta property="og:locale" content="pt_BR" />
+  
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://versatile-intelligence.vercel.app/" />
+  <meta property="twitter:title" content="Inteligência Versátil | Maior Comunidade de IA do Brasil" />
+  <meta property="twitter:description" content="Junte-se à maior comunidade brasileira de Inteligência Artificial. Aprenda, ensine e compartilhe conhecimento sobre IA. Grupo gratuito." />
+  <meta property="twitter:image" content="https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp" />
+  <meta property="twitter:image:alt" content="Logo da comunidade Inteligência Versátil" />
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Inteligência Versátil",
+    "description": "A maior comunidade brasileira de Inteligência Artificial. Um espaço democrático para aprender, ensinar e debater sobre IA.",
+    "url": "https://versatile-intelligence.vercel.app/",
+    "logo": "https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp",
+    "sameAs": [
+      "https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H"
+    ],
+    "areaServed": "Brazil",
+    "inLanguage": "pt-BR",
+    "knowsAbout": [
+      "Inteligência Artificial",
+      "ChatGPT",
+      "Midjourney",
+      "Machine Learning",
+      "Aprendizado de Máquina",
+      "Redes Neurais",
+      "Processamento de Linguagem Natural"
+    ],
+    "mainEntity": {
+      "@type": "Event",
+      "name": "Grupo Inteligência Versátil",
+      "description": "Comunidade colaborativa para compartilhamento de conhecimento sobre Inteligência Artificial",
+      "url": "https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  }
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      page_title: 'Inteligência Versátil | Maior Comunidade de IA do Brasil',
+      page_location: 'https://versatile-intelligence.vercel.app/',
+      content_group1: 'landing-page',
+      anonymize_ip: true,
+      allow_google_signals: false
+    });
+  </script>
 </head>
 
 <body class="text-slate-800 font-sans min-h-screen relative selection:bg-fuchsia-400 selection:text-white">
@@ -227,24 +355,25 @@
   <div class="cursor-glow" id="cursor-glow"></div>
 
   <!-- Header -->
-  <header class="fixed top-4 w-full z-50">
+  <header class="fixed top-4 w-full z-50" role="banner">
     <div class="max-w-4xl mx-auto px-6">
       <div class="holo-card rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
         <div class="flex items-center gap-3">
           <img src="public/images/logo-comunidade.webp" alt="Logo da Comunidade Inteligência Versátil"
-            class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm">
+            class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" loading="lazy">
           <span class="font-display font-bold text-lg tracking-tight text-slate-800">
             Inteligência Versátil
           </span>
         </div>
 
         <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
-          class="hidden sm:inline-flex group relative overflow-hidden items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full hover:from-emerald-500 hover:to-teal-600 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+          class="hidden sm:inline-flex group relative overflow-hidden items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full hover:from-emerald-500 hover:to-teal-600 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+          aria-label="Participar do grupo no WhatsApp">
           <!-- Visual Shine Effect -->
           <div
             class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform ease-in-out">
           </div>
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path
               d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
             <path
@@ -256,7 +385,7 @@
     </div>
   </header>
 
-  <main class="flex-1 flex flex-col pt-32 pb-20 px-4 sm:px-6 relative max-w-6xl mx-auto w-full">
+  <main class="flex-1 flex flex-col pt-32 pb-20 px-4 sm:px-6 relative max-w-6xl mx-auto w-full" role="main">
 
     <!-- Hero Section with Asymmetric Layout -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-20 md:mb-32">
@@ -279,12 +408,13 @@
         </p>
 
         <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
-          class="inline-flex items-center justify-center relative overflow-hidden gap-3 px-8 py-4 text-lg font-bold text-white bg-slate-900 rounded-full hover:bg-slate-800 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-1 group">
+          class="inline-flex items-center justify-center relative overflow-hidden gap-3 px-8 py-4 text-lg font-bold text-white bg-slate-900 rounded-full hover:bg-slate-800 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-1 group focus:outline-none focus:ring-4 focus:ring-purple-300"
+          aria-label="Junte-se ao grupo de Inteligência Artificial no WhatsApp">
           <!-- Visual Shine Effect -->
           <div
             class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform ease-in-out">
           </div>
-          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path
               d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
             <path
@@ -381,6 +511,132 @@
 
     </div>
 
+    <!-- FAQ Section -->
+    <section class="mt-20 mb-12" aria-labelledby="faq-heading">
+      <div class="text-center mb-12 reveal">
+        <h2 id="faq-heading" class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          Perguntas Frequentes
+        </h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">
+          Tire suas dúvidas sobre o grupo Inteligência Versátil
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+                  aria-expanded="false" aria-controls="faq-answer-1">
+            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
+              <span class="text-2xl">🤔</span>
+              O grupo é gratuito?
+            </h3>
+            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="faq-answer-1" class="hidden mt-4 text-slate-600 leading-relaxed" 
+               itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+            <p itemprop="text">
+              Sim! O Inteligência Versátil é 100% gratuito. Nosso objetivo é compartilhar conhecimento sobre 
+              Inteligência Artificial de forma democrática e acessível para todos.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+                  aria-expanded="false" aria-controls="faq-answer-2">
+            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
+              <span class="text-2xl">👥</span>
+              Quem pode participar?
+            </h3>
+            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="faq-answer-2" class="hidden mt-4 text-slate-600 leading-relaxed" 
+               itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+            <p itemprop="text">
+              Qualquer pessoa interessada em Inteligência Artificial! Não importa seu nível de conhecimento - 
+              desde iniciantes curiosos até especialistas da área. Todos são bem-vindos para aprender, ensinar e trocar experiências.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+                  aria-expanded="false" aria-controls="faq-answer-3">
+            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
+              <span class="text-2xl">💡</span>
+              Que assuntos são discutidos?
+            </h3>
+            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="faq-answer-3" class="hidden mt-4 text-slate-600 leading-relaxed" 
+               itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+            <p itemprop="text">
+              Discutimos diversos tópicos de IA: ChatGPT, Midjourney, Machine Learning, Redes Neurais, 
+              Processamento de Linguagem Natural, ética em IA, ferramentas práticas, casos de uso, 
+              novidades do mercado e muito mais!
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+                  aria-expanded="false" aria-controls="faq-answer-4">
+            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
+              <span class="text-2xl">📱</span>
+              Como entro no grupo?
+            </h3>
+            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="faq-answer-4" class="hidden mt-4 text-slate-600 leading-relaxed" 
+               itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+            <p itemprop="text">
+              É simples! Clique em qualquer botão "Quero Participar" ou "Participar do Grupo" nesta página. 
+              Você será redirecionado para nosso grupo no WhatsApp. É só clicar e começar a participar!
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+                  aria-expanded="false" aria-controls="faq-answer-5">
+            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
+              <span class="text-2xl">📚</span>
+              Preciso ter conhecimento prévio?
+            </h3>
+            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="faq-answer-5" class="hidden mt-4 text-slate-600 leading-relaxed" 
+               itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+            <p itemprop="text">
+              Não! O grupo é para todos os níveis. Se você está começando agora, terá um ótimo lugar para 
+              aprender o básico. Se já tem experiência, poderá compartilhar conhecimento e aprender com os outros. 
+              Acreditamos que todos têm algo a ensinar e algo a aprender.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script>
@@ -444,6 +700,24 @@
     }, observerOptions);
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FAQ Accordion
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const answerId = toggle.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle current item
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        answer.classList.toggle('hidden');
+        
+        // Rotate chevron
+        const chevron = toggle.querySelector('svg');
+        chevron.classList.toggle('rotate-180');
+      });
+    });
   </script>
 
   <footer class="mt-20 py-10 bg-white/60 backdrop-blur-md border-t border-white/50">
@@ -453,7 +727,7 @@
       <div class="flex flex-col items-center md:items-start gap-2">
         <div class="flex items-center gap-3 opacity-90">
           <img src="public/images/logo-comunidade.webp" alt="Logo da Inteligência Versátil"
-            class="w-8 h-8 rounded-full border border-slate-200 shadow-sm">
+            class="w-8 h-8 rounded-full border border-slate-200 shadow-sm" loading="lazy">
           <span class="font-display text-base font-bold text-slate-700 tracking-wide">Inteligência Versátil</span>
         </div>
         <div class="text-xs text-slate-500 font-medium md:pl-11">
@@ -483,7 +757,7 @@
 
         <div
           class="relative w-9 h-9 rounded-lg bg-slate-100 border border-slate-200/50 group-hover:border-purple-200 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-fuchsia-600 flex items-center justify-center transition-all duration-300 shadow-inner group-hover:shadow-lg z-10">
-          <img src="public/images/logo-inkpage.svg" alt="Logo Inkpage"
+          <img src="public/images/logo-inkpage.svg" alt="Logo Inkpage - Agência Digital"
             class="w-5 h-5 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-0 group-hover:invert transition-all duration-300">
         </div>
       </a>
