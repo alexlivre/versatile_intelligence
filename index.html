@@ -290,43 +290,88 @@
   <meta property="twitter:image" content="https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp" />
   <meta property="twitter:image:alt" content="Logo da comunidade Inteligência Versátil" />
   
-  <!-- Schema.org JSON-LD -->
+  <!-- Three.js CDN (Loaded asynchronously to optimize LCP and support file:// offline use) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+  <!-- Schema.org JSON-LD (Unified Organization & FAQPage for GEO / LLM optimization) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Inteligência Versátil",
-    "description": "A maior comunidade brasileira de Inteligência Artificial. Um espaço democrático para aprender, ensinar e debater sobre IA.",
-    "url": "https://versatile-intelligence.vercel.app/",
-    "logo": "https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp",
-    "sameAs": [
-      "https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H"
-    ],
-    "areaServed": "Brazil",
-    "inLanguage": "pt-BR",
-    "knowsAbout": [
-      "Inteligência Artificial",
-      "ChatGPT",
-      "Midjourney",
-      "Machine Learning",
-      "Aprendizado de Máquina",
-      "Redes Neurais",
-      "Processamento de Linguagem Natural"
-    ],
-    "mainEntity": {
-      "@type": "Event",
-      "name": "Grupo Inteligência Versátil",
-      "description": "Comunidade colaborativa para compartilhamento de conhecimento sobre Inteligência Artificial",
-      "url": "https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H",
-      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "BRL",
-        "availability": "https://schema.org/InStock"
-      }
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Inteligência Versátil",
+      "description": "A maior comunidade brasileira de Inteligência Artificial. Um espaço democrático para aprender, ensinar e debater sobre IA, ChatGPT, Midjourney e Prompt Engineering no WhatsApp.",
+      "url": "https://versatile-intelligence.vercel.app/",
+      "logo": "https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp",
+      "sameAs": [
+        "https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brazil"
+      },
+      "inLanguage": "pt-BR",
+      "knowsAbout": [
+        "Inteligência Artificial",
+        "Inteligência Artificial Generativa",
+        "Generative AI",
+        "ChatGPT",
+        "Midjourney",
+        "Claude",
+        "Prompt Engineering",
+        "Engenharia de Prompts",
+        "Machine Learning",
+        "Aprendizado de Máquina",
+        "Processamento de Linguagem Natural"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "A comunidade de Inteligência Artificial do Inteligência Versátil é gratuita?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim! A comunidade Inteligência Versátil é 100% gratuita. Não cobramos nenhuma taxa de adesão ou mensalidade para participar do nosso grupo de networking e aprendizado de IA generativa no WhatsApp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quem pode participar do grupo de WhatsApp do Inteligência Versátil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Qualquer pessoa interessada em inteligência artificial e tecnologia pode participar da comunidade. O grupo reúne programadores, designers de interfaces, profissionais de marketing, copywriters, estudantes e especialistas em Machine Learning e engenharia de prompts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quais tópicos sobre inteligência artificial são discutidos no grupo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Os membros discutem diariamente sobre IA generativa, engenharia de prompts, ferramentas práticas e automações inteligentes, incluindo o uso de ChatGPT, Claude, Midjourney e Stable Diffusion, além de APIs de IA, novidades do mercado e ética tecnológica."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como posso entrar no grupo de WhatsApp oficial da Inteligência Versátil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para entrar na comunidade, basta clicar em qualquer botão de convite da nossa página oficial, como 'Quero Participar' ou 'Participar do Grupo', para ser redirecionado instantaneamente e de forma segura ao grupo do WhatsApp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso ter algum conhecimento técnico prévio em programação para participar da comunidade?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não é necessário nenhum conhecimento técnico prévio ou habilidade de programação. O grupo é aberto a todos os níveis de experiência, desde iniciantes que desejam aprender a utilizar IAs no dia a dia até profissionais experientes que compartilham insights e inovações."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 
   <!-- Google Analytics 4 -->
@@ -347,11 +392,16 @@
 
 <body class="text-slate-800 font-sans min-h-screen relative selection:bg-fuchsia-400 selection:text-white">
 
+  <!-- Background Fallback (CSS) -->
   <div class="radiant-bg">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
+
+  <!-- WebGL Neural Background Canvas -->
+  <canvas id="webgl-bg-canvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none transition-opacity duration-1000 opacity-0"></canvas>
+
   <div class="cursor-glow" id="cursor-glow"></div>
 
   <!-- Header -->
@@ -428,15 +478,20 @@
         </a>
       </div>
 
-      <!-- Visual Side (Abstract Representation) -->
+      <!-- Visual Side (Original UI with 3D WebGL Background) -->
       <div class="md:col-span-5 relative hidden md:block reveal">
         <div class="relative w-full aspect-square">
+          <!-- Background Glow -->
           <div
             class="absolute inset-0 bg-gradient-to-tr from-cyan-400 via-fuchsia-400 to-yellow-300 rounded-full blur-2xl opacity-40 animate-pulse-glow">
           </div>
+          <!-- Interactive Card -->
           <div
-            class="holo-card w-full h-full rounded-[2rem] flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500 tilt-element">
-            <div class="text-center space-y-4">
+            id="hero-interactive-card"
+            class="holo-card w-full h-full rounded-[2rem] flex flex-col items-center justify-center p-8 rotate-3 hover:rotate-0 transition-all duration-500 relative overflow-hidden tilt-element">
+            
+            <!-- Original Content (rendered on top of WebGL canvas) -->
+            <div class="text-center space-y-4 relative z-10 pointer-events-none select-none">
               <div class="text-6xl animate-bounce">✨</div>
               <h3 class="font-display text-2xl font-bold text-slate-800">Conhecimento <br> & Conexão</h3>
               <div class="flex justify-center -space-x-4">
@@ -447,10 +502,102 @@
                   +99</div>
               </div>
             </div>
+
+            <!-- WebGL Canvas (background layers, fade in when loaded) -->
+            <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full opacity-0 transition-opacity duration-700 block pointer-events-auto cursor-grab active:cursor-grabbing z-0"></canvas>
+
+            <!-- Interactive Hint Badge (fades in if WebGL loads) -->
+            <div id="hero-3d-hint" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-bold text-slate-400 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm pointer-events-none opacity-0 transition-opacity duration-700 z-10 flex items-center gap-1.5 uppercase tracking-wider">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
+              Mova o mouse para interagir
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- GEO Optimization: Quick Facts structured in highly aesthetic glassmorphism cards -->
+    <section class="mb-24 reveal" aria-labelledby="quick-facts-title">
+      <div class="max-w-5xl mx-auto">
+        <h2 id="quick-facts-title" class="font-display text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center flex items-center justify-center gap-2.5">
+          DNA da Comunidade
+        </h2>
+        
+        <!-- Description List for perfect semantic LLM parsing (GEO) & Responsive layout for premium UI -->
+        <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Card 1: Nome Oficial -->
+          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-purple-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-100/30 transition-all duration-300 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-lg text-white shadow-md shadow-fuchsia-200/50 flex-shrink-0">
+              ✨
+            </div>
+            <div>
+              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Nome Oficial</dt>
+              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">Comunidade Inteligência Versátil</dd>
+            </div>
+          </div>
+
+          <!-- Card 2: Tipo de Acesso -->
+          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-emerald-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-100/30 transition-all duration-300 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-lg text-white shadow-md shadow-emerald-200/50 flex-shrink-0">
+              🎁
+            </div>
+            <div>
+              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tipo de Acesso</dt>
+              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">
+                <span class="inline-block px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wide mr-1.5 shadow-sm">100% Gratuito</span>
+                Sem taxas ou assinaturas
+              </dd>
+            </div>
+          </div>
+
+          <!-- Card 3: Plataforma e Canal -->
+          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-cyan-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-100/30 transition-all duration-300 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-lg text-white shadow-md shadow-cyan-200/50 flex-shrink-0">
+              💬
+            </div>
+            <div>
+              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Canal Oficial</dt>
+              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">Grupo de Discussão no WhatsApp</dd>
+            </div>
+          </div>
+
+          <!-- Card 4: Foco Temático -->
+          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-violet-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-violet-100/30 transition-all duration-300 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-lg text-white shadow-md shadow-violet-200/50 flex-shrink-0">
+              🧠
+            </div>
+            <div>
+              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tópicos Principais</dt>
+              <dd class="text-sm font-bold text-slate-800 mt-1 leading-snug">IA Generativa, ChatGPT, Claude, Midjourney, Prompt Engineering e Machine Learning</dd>
+            </div>
+          </div>
+
+          <!-- Card 5: Região e Idioma -->
+          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-blue-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-100/30 transition-all duration-300 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-lg text-white shadow-md shadow-blue-200/50 flex-shrink-0">
+              🌐
+            </div>
+            <div>
+              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Região e Idioma</dt>
+              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">Brasil (Língua Portuguesa - pt-BR)</dd>
+            </div>
+          </div>
+
+          <!-- Card 6: Público-Alvo -->
+          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-amber-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-100/30 transition-all duration-300 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-lg text-white shadow-md shadow-amber-200/50 flex-shrink-0">
+              👥
+            </div>
+            <div>
+              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Público-Alvo</dt>
+              <dd class="text-sm font-bold text-slate-800 mt-1 leading-snug">Iniciantes, designers, copywriters, desenvolvedores e profissionais de TI</dd>
+            </div>
+          </div>
+
+        </dl>
+      </div>
+    </section>
 
     <!-- Bento Grid Intro -->
     <div class="text-center mb-12 reveal">
@@ -461,64 +608,61 @@
     <!-- The Bento Grid Layout -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(180px,auto)]">
 
-      <!-- Big Card: Intro -->
+      <!-- Big Card: Intro (BLUF Optimized) -->
       <div class="holo-card rounded-3xl p-8 md:col-span-2 lg:col-span-2 flex flex-col justify-center reveal tilt-element">
         <h3 class="font-display text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
           <span class="text-3xl">🚀</span> Propósito
         </h3>
         <p class="text-slate-600 text-lg leading-relaxed">
-          <strong class="text-slate-900">Inteligência Versátil</strong> é sobre pessoas. Acreditamos que a IA é uma
-          ferramenta poderosa, mas a troca humana é o que realmente importa. Aqui, todos têm voz e algo a ensinar.
+          <strong class="text-slate-900">A comunidade Inteligência Versátil é focada em conectar pessoas no Brasil para debater inteligência artificial.</strong> Acreditamos que a IA generativa é um catalisador tecnológico potente, mas o compartilhamento de conhecimento humano e o networking prático no grupo de WhatsApp oficial é o que realmente multiplica resultados e gera novas oportunidades.
         </p>
       </div>
 
-      <!-- Card: Content -->
+      <!-- Card: Content (BLUF Optimized) -->
       <div class="holo-card rounded-3xl p-8 flex flex-col items-start gap-4 hover:bg-cyan-50/50 transition-colors">
         <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl">📚</div>
-        <h4 class="font-display text-xl font-bold text-slate-800">Aprendizado</h4>
-        <p class="text-slate-600">Conteúdos, tutoriais e dicas práticas para todos os níveis de conhecimento.</p>
+        <h4 class="font-display text-xl font-bold text-slate-800">Aprendizado Contínuo</h4>
+        <p class="text-slate-600">Acesse tutoriais, guias de prompt engineering e dicas práticas sobre ChatGPT e Midjourney compartilhados diariamente no grupo.</p>
       </div>
 
-      <!-- Card: Debates -->
+      <!-- Card: Debates (BLUF Optimized) -->
       <div class="holo-card rounded-3xl p-8 flex flex-col items-start gap-4 hover:bg-fuchsia-50/50 transition-colors">
-        <div class="w-12 h-12 rounded-2xl bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center text-2xl">💬
-        </div>
-        <h4 class="font-display text-xl font-bold text-slate-800">Troca</h4>
-        <p class="text-slate-600">Compartilhe suas dúvidas, descobertas e experiências com o grupo.</p>
+        <div class="w-12 h-12 rounded-2xl bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center text-2xl">💬</div>
+        <h4 class="font-display text-xl font-bold text-slate-800">Networking e Troca</h4>
+        <p class="text-slate-600">Debata novidades de mercado, valide suas dúvidas técnicas de automação e compartilhe novidades tecnológicas com outros profissionais de IA.</p>
       </div>
 
-      <!-- Card: Community -->
+      <!-- Card: Community (BLUF Optimized) -->
       <div class="holo-card rounded-3xl p-8 flex flex-col items-start gap-4 hover:bg-yellow-50/50 transition-colors">
-        <div class="w-12 h-12 rounded-2xl bg-yellow-100 text-yellow-600 flex items-center justify-center text-2xl">🤝
-        </div>
-        <h4 class="font-display text-xl font-bold text-slate-800">Diversidade</h4>
-        <p class="text-slate-600">Pessoas de diferentes áreas somando perspectivas únicas.</p>
+        <div class="w-12 h-12 rounded-2xl bg-yellow-100 text-yellow-600 flex items-center justify-center text-2xl">🤝</div>
+        <h4 class="font-display text-xl font-bold text-slate-800">Diversidade Técnica</h4>
+        <p class="text-slate-600">Interaja com designers, redatores, programadores e analistas de marketing digital que aplicam IA em seus cotidianos profissionais.</p>
       </div>
 
-      <!-- Card: Respect -->
+      <!-- Card: Respect (BLUF Optimized) -->
       <div
         class="holo-card rounded-3xl p-8 md:col-span-2 lg:col-span-1 flex flex-col justify-center bg-gradient-to-br from-white to-violet-50">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-10 h-10 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center">❤️</div>
-          <h4 class="font-display text-xl font-bold text-slate-800">Ambiente</h4>
+          <h4 class="font-display text-xl font-bold text-slate-800">Ambiente Seguro</h4>
         </div>
         <p class="text-lg font-medium text-slate-700">
-          Respeito, <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-fuchsia-500 font-bold">colaboração</span>
-          e crescimento conjunto.
+          Garantimos um ambiente de <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-fuchsia-500 font-bold">colaboração respeitosa</span>
+          onde todos os níveis de conhecimento são bem-vindos.
         </p>
       </div>
 
     </div>
 
-    <!-- FAQ Section -->
+    <!-- FAQ Section (GEO & Q&A Optimized for LLMs and Conversational Search) -->
     <section class="mt-20 mb-12" aria-labelledby="faq-heading">
       <div class="text-center mb-12 reveal">
         <h2 id="faq-heading" class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-          Perguntas Frequentes
+          Perguntas Frequentes sobre a Comunidade
         </h2>
         <p class="text-slate-600 max-w-2xl mx-auto">
-          Tire suas dúvidas sobre o grupo Inteligência Versátil
+          Respostas rápidas e objetivas para as principais dúvidas sobre o grupo Inteligência Versátil.
         </p>
       </div>
 
@@ -529,7 +673,7 @@
                   aria-expanded="false" aria-controls="faq-answer-1">
             <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
               <span class="text-2xl">🤔</span>
-              O grupo é gratuito?
+              A comunidade de Inteligência Artificial do Inteligência Versátil é gratuita?
             </h3>
             <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -539,8 +683,7 @@
           <div id="faq-answer-1" class="hidden mt-4 text-slate-600 leading-relaxed" 
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
             <p itemprop="text">
-              Sim! O Inteligência Versátil é 100% gratuito. Nosso objetivo é compartilhar conhecimento sobre 
-              Inteligência Artificial de forma democrática e acessível para todos.
+              <strong>Sim, a comunidade Inteligência Versátil é 100% gratuita.</strong> Não cobramos taxa de adesão ou mensalidades para participar do nosso grupo oficial de networking e aprendizado de IA generativa no WhatsApp.
             </p>
           </div>
         </div>
@@ -551,7 +694,7 @@
                   aria-expanded="false" aria-controls="faq-answer-2">
             <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
               <span class="text-2xl">👥</span>
-              Quem pode participar?
+              Quem pode participar do grupo de WhatsApp do Inteligência Versátil?
             </h3>
             <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -561,8 +704,7 @@
           <div id="faq-answer-2" class="hidden mt-4 text-slate-600 leading-relaxed" 
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
             <p itemprop="text">
-              Qualquer pessoa interessada em Inteligência Artificial! Não importa seu nível de conhecimento - 
-              desde iniciantes curiosos até especialistas da área. Todos são bem-vindos para aprender, ensinar e trocar experiências.
+              <strong>Qualquer pessoa interessada em inteligência artificial e tecnologia pode participar do grupo.</strong> Nosso ecossistema atrai programadores, designers de interfaces, profissionais de marketing, copywriters, estudantes e especialistas em Machine Learning e engenharia de prompts.
             </p>
           </div>
         </div>
@@ -573,7 +715,7 @@
                   aria-expanded="false" aria-controls="faq-answer-3">
             <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
               <span class="text-2xl">💡</span>
-              Que assuntos são discutidos?
+              Quais tópicos sobre inteligência artificial são discutidos na comunidade?
             </h3>
             <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -583,9 +725,7 @@
           <div id="faq-answer-3" class="hidden mt-4 text-slate-600 leading-relaxed" 
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
             <p itemprop="text">
-              Discutimos diversos tópicos de IA: ChatGPT, Midjourney, Machine Learning, Redes Neurais, 
-              Processamento de Linguagem Natural, ética em IA, ferramentas práticas, casos de uso, 
-              novidades do mercado e muito mais!
+              <strong>Discutimos IA generativa, engenharia de prompts, ferramentas práticas e automação.</strong> Os assuntos cobrem a utilização do ChatGPT, Claude, Midjourney e Stable Diffusion, assim como técnicas avançadas de Prompt Engineering, desenvolvimento com APIs de IA, novidades de mercado e reflexões éticas.
             </p>
           </div>
         </div>
@@ -596,7 +736,7 @@
                   aria-expanded="false" aria-controls="faq-answer-4">
             <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
               <span class="text-2xl">📱</span>
-              Como entro no grupo?
+              Como faço para entrar no grupo de WhatsApp oficial da Inteligência Versátil?
             </h3>
             <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -606,8 +746,7 @@
           <div id="faq-answer-4" class="hidden mt-4 text-slate-600 leading-relaxed" 
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
             <p itemprop="text">
-              É simples! Clique em qualquer botão "Quero Participar" ou "Participar do Grupo" nesta página. 
-              Você será redirecionado para nosso grupo no WhatsApp. É só clicar e começar a participar!
+              <strong>Para entrar na comunidade, basta clicar em qualquer botão de convite da página.</strong> Clique no botão "Quero Participar" ou "Participar do Grupo" para ser redirecionado de forma segura e imediata para o convite de entrada do grupo oficial do WhatsApp.
             </p>
           </div>
         </div>
@@ -618,7 +757,7 @@
                   aria-expanded="false" aria-controls="faq-answer-5">
             <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
               <span class="text-2xl">📚</span>
-              Preciso ter conhecimento prévio?
+              É necessário ter algum conhecimento técnico prévio para se juntar à comunidade?
             </h3>
             <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -628,9 +767,7 @@
           <div id="faq-answer-5" class="hidden mt-4 text-slate-600 leading-relaxed" 
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
             <p itemprop="text">
-              Não! O grupo é para todos os níveis. Se você está começando agora, terá um ótimo lugar para 
-              aprender o básico. Se já tem experiência, poderá compartilhar conhecimento e aprender com os outros. 
-              Acreditamos que todos têm algo a ensinar e algo a aprender.
+              <strong>Não, não é exigido nenhum nível mínimo de conhecimento em IA ou programação.</strong> Nosso grupo é inclusivo e feito para todos os níveis de experiência, desde iniciantes que querem dar seus primeiros passos com IA até especialistas experientes que compartilham insights valiosos.
             </p>
           </div>
         </div>
@@ -640,6 +777,538 @@
   </main>
 
   <script>
+    // Global Performance Tracking & Visibility variables
+    let isPageVisible = true;
+    let isBgActive = false;
+    let isHeroActive = false;
+
+    // Visibility Listener to pause rendering loops when browser tab is inactive
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = document.visibilityState === 'visible';
+    });
+
+    // Initialize WebGL Effects if Three.js loaded successfully
+    window.addEventListener('load', () => {
+      if (typeof THREE !== 'undefined') {
+        initWebGLBackground();
+        initWebGLHero();
+      }
+    });
+
+    // 1. WebGL Neural Network Background Effect
+    function initWebGLBackground() {
+      const canvas = document.getElementById('webgl-bg-canvas');
+      if (!canvas) return;
+
+      // Renderer setup with performance optimizations (no antialias on points background to save CPU/GPU)
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: false,
+        powerPreference: 'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const scene = new THREE.Scene();
+      
+      // Perspective camera to add realistic 3D depth to floating nodes
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+      camera.position.z = 400;
+
+      // Setup 120 particles in a 3D volume
+      const particleCount = 120;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const velocities = [];
+
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        // Random distribution in space
+        positions[i] = (Math.random() - 0.5) * window.innerWidth * 1.5;
+        positions[i + 1] = (Math.random() - 0.5) * window.innerHeight * 1.5;
+        positions[i + 2] = (Math.random() - 0.5) * 400; // Depth variation
+
+        // Velocity components
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.4,
+          y: (Math.random() - 0.5) * 0.4,
+          z: (Math.random() - 0.5) * 0.2
+        });
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      // Simple Point Material - Violet color mapped from theme (#8b5cf6)
+      const material = new THREE.PointsMaterial({
+        color: 0x8b5cf6,
+        size: 3.0,
+        transparent: true,
+        opacity: 0.45,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      // Pre-allocated Line Geometry to prevent garbage collection spikes
+      const maxLines = 200;
+      const lineGeometry = new THREE.BufferGeometry();
+      const linePositions = new Float32Array(maxLines * 2 * 3); // 2 points per line, 3 coords
+      const lineColors = new Float32Array(maxLines * 2 * 4); // 2 colors per line, 4 components (RGBA)
+
+      lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+      lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 4));
+
+      const lineMaterial = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+      scene.add(lineSegments);
+
+      // Mouse tracking for localized neural reaction
+      const mouse = { x: 0, y: 0, targetX: 0, targetY: 0, active: false };
+      
+      window.addEventListener('mousemove', (e) => {
+        // Convert screen coordinates to normalized device coordinates (-1 to +1)
+        mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+        mouse.active = true;
+      });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.active = false;
+      });
+
+      // Window resize adaptation
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Intersection Observer for Background Visibility Control
+      const bgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isBgActive = entry.isIntersecting;
+        });
+      }, { threshold: 0.01 });
+      bgObserver.observe(canvas);
+
+      // Render loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // CPU/GPU Saver: Pause if tab is inactive or canvas is out of viewport
+        if (!isPageVisible || !isBgActive) return;
+
+        const posAttr = points.geometry.attributes.position;
+        const positionsArray = posAttr.array;
+
+        // Smooth mouse interpolations
+        mouse.x += (mouse.targetX - mouse.x) * 0.1;
+        mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+        // Transform mouse coords to 3D space near camera (Z = 0)
+        const vWidth = Math.tan(30 * Math.PI / 180) * 400 * 2 * camera.aspect;
+        const vHeight = Math.tan(30 * Math.PI / 180) * 400 * 2;
+        const mouse3D = {
+          x: mouse.x * vWidth / 2,
+          y: mouse.y * vHeight / 2
+        };
+
+        // Update particle positions
+        for (let i = 0; i < particleCount; i++) {
+          const idx = i * 3;
+          let px = positionsArray[idx];
+          let py = positionsArray[idx + 1];
+          let pz = positionsArray[idx + 2];
+
+          // Apply raw velocity
+          px += velocities[i].x;
+          py += velocities[i].y;
+          pz += velocities[i].z;
+
+          // Mouse influence (slight repulsing force near mouse)
+          if (mouse.active) {
+            const dx = px - mouse3D.x;
+            const dy = py - mouse3D.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              const force = (150 - dist) * 0.005;
+              px += (dx / dist) * force;
+              py += (dy / dist) * force;
+            }
+          }
+
+          // Boundary bouncing logic in 3D
+          const boundX = (window.innerWidth * 1.5) / 2;
+          const boundY = (window.innerHeight * 1.5) / 2;
+
+          if (Math.abs(px) > boundX) velocities[i].x *= -1;
+          if (Math.abs(py) > boundY) velocities[i].y *= -1;
+          if (Math.abs(pz) > 200) velocities[i].z *= -1;
+
+          positionsArray[idx] = px;
+          positionsArray[idx + 1] = py;
+          positionsArray[idx + 2] = pz;
+        }
+        posAttr.needsUpdate = true;
+
+        // Connect nearby nodes
+        const linePosAttr = lineGeometry.attributes.position;
+        const linePositionsArray = linePosAttr.array;
+        const lineColAttr = lineGeometry.attributes.color;
+        const lineColorsArray = lineColAttr.array;
+
+        let lineIdx = 0;
+        let colorIdx = 0;
+        let connections = 0;
+
+        for (let i = 0; i < particleCount && connections < maxLines; i++) {
+          const idxA = i * 3;
+          const ax = positionsArray[idxA];
+          const ay = positionsArray[idxA + 1];
+          const az = positionsArray[idxA + 2];
+
+          for (let j = i + 1; j < particleCount && connections < maxLines; j++) {
+            const idxB = j * 3;
+            const bx = positionsArray[idxB];
+            const by = positionsArray[idxB + 1];
+            const bz = positionsArray[idxB + 2];
+
+            const dx = ax - bx;
+            const dy = ay - by;
+            const dz = az - bz;
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+            // Connect if close enough
+            if (dist < 110) {
+              linePositionsArray[lineIdx++] = ax;
+              linePositionsArray[lineIdx++] = ay;
+              linePositionsArray[lineIdx++] = az;
+              linePositionsArray[lineIdx++] = bx;
+              linePositionsArray[lineIdx++] = by;
+              linePositionsArray[lineIdx++] = bz;
+
+              const alpha = (1 - (dist / 110)) * 0.22;
+
+              // Line colors (RGB: violet spectrum 139, 92, 246)
+              lineColorsArray[colorIdx++] = 139 / 255;
+              lineColorsArray[colorIdx++] = 92 / 255;
+              lineColorsArray[colorIdx++] = 246 / 255;
+              lineColorsArray[colorIdx++] = alpha;
+
+              lineColorsArray[colorIdx++] = 139 / 255;
+              lineColorsArray[colorIdx++] = 92 / 255;
+              lineColorsArray[colorIdx++] = 246 / 255;
+              lineColorsArray[colorIdx++] = alpha;
+
+              connections++;
+            }
+          }
+        }
+
+        linePosAttr.needsUpdate = true;
+        lineColAttr.needsUpdate = true;
+        lineGeometry.setDrawRange(0, connections * 2);
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Soft fade-in background canvas
+      setTimeout(() => {
+        canvas.style.opacity = '0.55';
+      }, 100);
+    }
+
+    // 2. WebGL Interactive AI Sphere Effect (Hero section)
+    function initWebGLHero() {
+      const canvas = document.getElementById('hero-3d-canvas');
+      const hintBadge = document.getElementById('hero-3d-hint');
+      const cardContainer = document.getElementById('hero-interactive-card');
+      if (!canvas || !cardContainer) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(rect.width, rect.height);
+
+      const scene = new THREE.Scene();
+      
+      const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 100);
+      camera.position.z = 3.6;
+
+      // Group to hold particles
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // Generate a sphere cloud of brilliant particles (representing neural nodes)
+      const particleCount = 220;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const originalPositions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      const palette = [
+        new THREE.Color(0x06b6d4), // Cyan
+        new THREE.Color(0xd946ef), // Magenta
+        new THREE.Color(0xf59e0b)  // Yellow-gold
+      ];
+
+      for (let i = 0; i < particleCount; i++) {
+        const idx = i * 3;
+        
+        // Random spherical distribution
+        const u = Math.random();
+        const v = Math.random();
+        const theta = u * 2 * Math.PI;
+        const phi = Math.acos(2 * v - 1);
+        
+        // Radius variation to create a hollow sphere layer
+        const r = 0.95 + Math.random() * 0.4;
+        
+        const x = r * Math.sin(phi) * Math.cos(theta);
+        const y = r * Math.sin(phi) * Math.sin(theta);
+        const z = r * Math.cos(phi);
+
+        positions[idx] = x;
+        positions[idx + 1] = y;
+        positions[idx + 2] = z;
+
+        // Backup original coordinates for physics calculation and sine wave pulsing
+        originalPositions[idx] = x;
+        originalPositions[idx + 1] = y;
+        originalPositions[idx + 2] = z;
+
+        // Map random palette colors to vertices
+        const clr = palette[Math.floor(Math.random() * palette.length)];
+        colors[idx] = clr.r;
+        colors[idx + 1] = clr.g;
+        colors[idx + 2] = clr.b;
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      // Point material with glowing additive blending properties
+      const material = new THREE.PointsMaterial({
+        size: 0.05,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      const points = new THREE.Points(geometry, material);
+      group.add(points);
+
+      // Interactive variables
+      const mouse = { x: 0, y: 0, active: false };
+      const targetMouse = { x: 0, y: 0 };
+      
+      let targetRotationX = 0;
+      let targetRotationY = 0;
+      let rotationX = 0;
+      let rotationY = 0;
+      let isDragging = false;
+      let previousMousePosition = { x: 0, y: 0 };
+
+      // Pointer event controls
+      const startDrag = (clientX, clientY) => {
+        isDragging = true;
+        previousMousePosition = { x: clientX, y: clientY };
+      };
+
+      const moveDrag = (clientX, clientY) => {
+        if (isDragging) {
+          const deltaX = clientX - previousMousePosition.x;
+          const deltaY = clientY - previousMousePosition.y;
+
+          targetRotationY += deltaX * 0.007;
+          targetRotationX += deltaY * 0.007;
+
+          previousMousePosition = { x: clientX, y: clientY };
+        }
+      };
+
+      const stopDrag = () => {
+        isDragging = false;
+      };
+
+      canvas.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+      window.addEventListener('mousemove', (e) => {
+        moveDrag(e.clientX, e.clientY);
+        
+        // Track local coordinates of mouse relative to card
+        const cardRect = cardContainer.getBoundingClientRect();
+        if (e.clientX >= cardRect.left && e.clientX <= cardRect.right &&
+            e.clientY >= cardRect.top && e.clientY <= cardRect.bottom) {
+          
+          mouse.active = true;
+          // Normalize to (-1 to +1) inside the card
+          targetMouse.x = ((e.clientX - cardRect.left) / cardRect.width) * 2 - 1;
+          targetMouse.y = -((e.clientY - cardRect.top) / cardRect.height) * 2 + 1;
+        } else {
+          mouse.active = false;
+        }
+      });
+      window.addEventListener('mouseup', stopDrag);
+
+      // Touch events support
+      canvas.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          startDrag(e.touches[0].clientX, e.touches[0].clientY);
+          mouse.active = true;
+          const cardRect = cardContainer.getBoundingClientRect();
+          targetMouse.x = ((e.touches[0].clientX - cardRect.left) / cardRect.width) * 2 - 1;
+          targetMouse.y = -((e.touches[0].clientY - cardRect.top) / cardRect.height) * 2 + 1;
+        }
+      });
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1) {
+          moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+          const cardRect = cardContainer.getBoundingClientRect();
+          targetMouse.x = ((e.touches[0].clientX - cardRect.left) / cardRect.width) * 2 - 1;
+          targetMouse.y = -((e.touches[0].clientY - cardRect.top) / cardRect.height) * 2 + 1;
+        }
+      });
+      window.addEventListener('touchend', () => {
+        stopDrag();
+        mouse.active = false;
+      });
+
+      // Resize observer to scale render viewport responsively
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          const { width, height } = entry.contentRect;
+          if (width > 0 && height > 0) {
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+          }
+        }
+      });
+      resizeObserver.observe(canvas.parentElement);
+
+      // Intersection Observer for Hero Visibility Loop
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isHeroActive = entry.isIntersecting;
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(canvas);
+
+      const clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Visibility Safeguard
+        if (!isPageVisible || !isHeroActive) return;
+
+        const time = clock.getElapsedTime();
+
+        // Smooth mouse coords interpolation
+        mouse.x += (targetMouse.x - mouse.x) * 0.1;
+        mouse.y += (targetMouse.y - mouse.y) * 0.1;
+
+        // Project mouse vector to 3D space near target coordinate depth Z=0
+        const raycaster = new THREE.Raycaster();
+        const tempMouse = new THREE.Vector2(mouse.x, mouse.y);
+        raycaster.setFromCamera(tempMouse, camera);
+        
+        // Find point of intersection with Z = 0 plane
+        const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+        const mouse3D = new THREE.Vector3();
+        raycaster.ray.intersectPlane(plane, mouse3D);
+
+        // Convert mouse position from world coordinates to local coordinate of the points group
+        const localMouse = group.worldToLocal(mouse3D.clone());
+
+        // Apply physical sine deformation & magnetic mouse attraction to points
+        const posAttr = points.geometry.attributes.position;
+        const origArray = originalPositions;
+        const posArray = posAttr.array;
+
+        for (let i = 0; i < posAttr.count; i++) {
+          const idx = i * 3;
+          let px = origArray[idx];
+          let py = origArray[idx + 1];
+          let pz = origArray[idx + 2];
+
+          // Compute distance of original position from center to get normal direction
+          const len = Math.sqrt(px*px + py*py + pz*pz);
+          const nx = px / len;
+          const ny = py / len;
+          const nz = pz / len;
+
+          // Standard orbital pulsing noise
+          const wave = Math.sin(nx * 3.0 + time * 1.2) * Math.cos(ny * 3.0 + time * 1.2) * Math.sin(nz * 3.0 + time * 1.2);
+          let deformFactor = 1.0 + wave * 0.08;
+
+          px *= deformFactor;
+          py *= deformFactor;
+          pz *= deformFactor;
+
+          // Magnetic attraction: pull points near mouse coordinate inside the cloud
+          if (mouse.active) {
+            const dx = px - localMouse.x;
+            const dy = py - localMouse.y;
+            const dz = pz - localMouse.z;
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            
+            if (dist < 1.0) {
+              const pull = (1.0 - dist) * 0.25;
+              px -= dx * pull;
+              py -= dy * pull;
+              pz -= dz * pull;
+            }
+          }
+
+          posArray[idx] = px;
+          posArray[idx + 1] = py;
+          posArray[idx + 2] = pz;
+        }
+        posAttr.needsUpdate = true;
+
+        // Rotations damping & Damping physics
+        rotationX += (targetRotationX - rotationX) * 0.08;
+        rotationY += (targetRotationY - rotationY) * 0.08;
+        
+        group.rotation.x = rotationX;
+        group.rotation.y = rotationY;
+
+        if (!isDragging) {
+          targetRotationY += 0.0025;
+          targetRotationX = Math.sin(time * 0.25) * 0.15;
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Progressive Enhancement transition: Fade in WebGL canvas and show interactive hint badge
+      setTimeout(() => {
+        canvas.style.opacity = '1';
+        if (hintBadge) hintBadge.style.opacity = '1';
+      }, 100);
+    }
+
+    // 3. Original Page Dynamic Interactions (Scroll, Cursor, Tilt, FAQ)
     // Cursor Glow and Grid Interaction
     const cursorGlow = document.getElementById('cursor-glow');
     document.addEventListener('mousemove', (e) => {
@@ -666,7 +1335,7 @@
       });
     });
 
-    // 3D Tilt Effect
+    // 3D Tilt Effect for static elements
     const tiltElements = document.querySelectorAll('.tilt-element');
     tiltElements.forEach(el => {
       el.addEventListener('mousemove', (e) => {
