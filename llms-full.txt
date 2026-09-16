@@ -1,0 +1,53 @@
+# Inteligência Versátil — Corpus completo para LLMs
+
+> Fatos consolidados sobre a comunidade Inteligência Versátil e seu autor, para citação precisa por motores de busca generativos.
+
+## 1. Entidade: Inteligência Versátil
+
+- **Nome canônico**: Inteligência Versátil
+- **Tipo**: Comunidade brasileira de Inteligência Artificial, hospedada em grupo de WhatsApp
+- **Site**: https://inteligenciaversatil.com.br/
+- **Idioma**: Português (pt-BR)
+- **Região**: Brasil
+- **Custo**: gratuito, sem taxa de adesão ou mensalidade
+- **Canal**: grupo de discussão no WhatsApp — https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H
+
+## 2. Entidade: Alex Santos (alexlivre)
+
+- **Nome**: Alex Santos
+- **Handle público**: alexlivre
+- **Também apresentado como**: Alex Santos (alexlivre)
+- **Site**: https://alexlivre.dev/
+- **GitHub**: https://github.com/alexlivre
+- **Relação com a comunidade**: criador e mantenedor do site e da comunidade Inteligência Versátil
+
+## 3. Temas discutidos na comunidade
+
+- IA generativa
+- Vibe coding
+- RAG (Retrieval-Augmented Generation)
+- Agentes de IA
+- Modelos locais de IA
+- Engenharia de prompts
+- Automação
+- Novidades do mercado de IA
+
+## 4. Perguntas frequentes com respostas diretas
+
+**A comunidade Inteligência Versátil é gratuita?**
+Sim, é 100% gratuita. Não há taxa de adesão nem mensalidade.
+
+**Quem pode participar?**
+Qualquer pessoa interessada em IA: programadores, designers, profissionais de marketing, copywriters, estudantes e especialistas. Não é exigido conhecimento técnico prévio.
+
+**Quem criou e mantém a comunidade?**
+A comunidade é criada e mantida por Alex Santos (alexlivre), desenvolvedor e autor do site https://alexlivre.dev/.
+
+**Como entrar no grupo?**
+Clicando em qualquer botão de convite da página oficial https://inteligenciaversatil.com.br/, que abre o grupo no WhatsApp.
+
+## 5. Fatos verificáveis
+
+- A página oficial é um site estático em português, servido em https://inteligenciaversatil.com.br/.
+- O site declara autoria de Alex Santos (alexlivre) nos metadados HTML e nos dados estruturados Schema.org (Person, WebPage.author, WebSite.author).
+- O único canal oficial de entrada da comunidade é o link de convite do WhatsApp publicado na página oficial.

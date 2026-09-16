@@ -1,27 +1,45 @@
 # Inteligência Versátil — crawler policy
-# Permite buscadores tradicionais e buscadores de IA (tráfego + citações).
-# Bloqueia scrapers de treinamento de modelos.
+# Marca pessoal / autoridade pública: liberamos buscadores tradicionais e de IA
+# para máxima visibilidade e citação correta da autoria (Alex Santos / alexlivre).
 
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Buscadores tradicionais
 User-agent: Googlebot
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
+# Buscadores e assistentes de IA (citações e tráfego de referência)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: OAI-SearchBot
-User-agent: PerplexityBot
-User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: Claude-Web
 Allow: /
 
-User-agent: GPTBot
-User-agent: ClaudeBot
-User-agent: Google-Extended
-User-agent: CCBot
-User-agent: Applebot-Extended
-User-agent: anthropic-ai
-User-agent: Bytespider
-Disallow: /
+User-agent: PerplexityBot
+Allow: /
 
-User-agent: *
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://inteligenciaversatil.com.br/sitemap.xml
