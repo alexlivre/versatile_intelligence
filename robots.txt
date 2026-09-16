@@ -1,0 +1,27 @@
+# Inteligência Versátil — crawler policy
+# Permite buscadores tradicionais e buscadores de IA (tráfego + citações).
+# Bloqueia scrapers de treinamento de modelos.
+
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-Web
+Allow: /
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: anthropic-ai
+User-agent: Bytespider
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://inteligenciaversatil.com.br/sitemap.xml
