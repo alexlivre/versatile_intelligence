@@ -1,6 +1,10 @@
 
 .gitpy-temp/
 
+node_modules/
+
+.playwright-mcp/
+
 *.pyc
 *.log
 *.swp
