@@ -4,14 +4,14 @@
 
 ## Entity Disambiguation
 - **Canonical Name**: Inteligência Versátil
-- **Author / Maintainer**: Alex Santos (alexlivre) — https://alexlivre.dev/
+- **Author / Maintainer**: Alex Santos (alexlivre) — https://alexlivre.dev/servicos/
 - **Primary Domain**: https://inteligenciaversatil.com.br
 - **Category**: Comunidade online / grupo de estudos de Inteligência Artificial
 - **Disambiguation Note**: "Inteligência Versátil" é o nome desta comunidade brasileira de IA no WhatsApp. Não confundir com "versatilidade" como conceito genérico, nem com produtos de IA de mesmo nome. "alexlivre" é o handle público de Alex Santos e se refere à mesma pessoa em https://alexlivre.dev/ e https://github.com/alexlivre.
 
 ## Key Resources
 - [Página oficial da comunidade](https://inteligenciaversatil.com.br/): descrição, temas, FAQ e convite para o grupo no WhatsApp.
-- [Site do autor](https://alexlivre.dev/): trabalhos e informações de Alex Santos (alexlivre).
+- [Serviços de Alex Santos (alexlivre)](https://alexlivre.dev/servicos/): serviços e trabalhos de Alex Santos (alexlivre).
 - [GitHub](https://github.com/alexlivre): código aberto de Alex Santos (alexlivre).
 - [Dossiê completo para LLMs](https://inteligenciaversatil.com.br/llms-full.txt): fatos consolidados sobre a comunidade e o autor.
 
