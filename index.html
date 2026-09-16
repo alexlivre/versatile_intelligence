@@ -27,10 +27,19 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Inter"', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+            display: ['"Space Grotesk"', '"Inter"', 'sans-serif'],
           },
           colors: {
+            ink: '#0f172a',
+            paper: '#f7f8f7',
+            accent: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+            },
             holo: {
               50: '#f0f9ff',
               100: '#e0f2fe',
@@ -43,16 +52,11 @@
           animation: {
             'float-slow': 'float 8s ease-in-out infinite',
             'float-fast': 'float 5s ease-in-out infinite reverse',
-            'pulse-glow': 'pulseGlow 3s infinite',
           },
           keyframes: {
             float: {
               '0%, 100%': { transform: 'translateY(0)' },
               '50%': { transform: 'translateY(-20px)' },
-            },
-            pulseGlow: {
-              '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
-              '50%': { opacity: '1', transform: 'scale(1.05)' },
             }
           }
         }
@@ -61,12 +65,57 @@
   </script>
 
   <style>
-    body {
-      background-color: #f8fafc;
-      overflow-x: hidden;
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --faint: #64748b;
+      --line: #e2e8f0;
+      --paper: #f7f8f7;
+      --accent: #047857;
+      --accent-strong: #065f46;
+      --accent-soft: #ecfdf5;
+      --radius-lg: 20px;
+      --radius-md: 14px;
     }
 
-    /* Radiant Mesh Background */
+    html {
+      scroll-padding-top: 96px;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: fixed;
+      top: -60px;
+      left: 16px;
+      z-index: 10000;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: top 0.2s ease;
+      text-decoration: none;
+    }
+    .skip-link:focus-visible {
+      top: 12px;
+    }
+
+    :focus-visible {
+      outline: 3px dashed var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Radiant Mesh Background — toned down, single wash */
     .radiant-bg {
       position: fixed;
       top: 0;
@@ -74,7 +123,10 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
-      background: radial-gradient(circle at top left, #f0f9ff, #fdf4ff, #fae8ff);
+      background:
+        radial-gradient(60% 45% at 15% 0%, rgba(5, 150, 105, 0.08), transparent 70%),
+        radial-gradient(55% 45% at 90% 20%, rgba(139, 92, 246, 0.07), transparent 70%),
+        #f7f8f7;
       overflow: hidden;
     }
 
@@ -86,9 +138,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: 
-        linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
       background-size: 40px 40px;
       mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 80%);
       -webkit-mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 80%);
@@ -98,37 +150,33 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.4;
-      mix-blend-mode: multiply;
-      transition: transform 0.3s ease-out;
+      filter: blur(100px);
+      opacity: 0.28;
+      pointer-events: none;
     }
 
     .orb-1 {
       top: -10%;
       left: -10%;
-      width: 50vw;
-      height: 50vw;
-      background: #22d3ee;
-      animation: float-slow 20s infinite alternate;
+      width: 44vw;
+      height: 44vw;
+      background: #a7f3d0;
     }
 
     .orb-2 {
       top: 20%;
       right: -20%;
-      width: 60vw;
-      height: 60vw;
-      background: #e879f9;
-      animation: float-fast 25s infinite alternate-reverse;
+      width: 48vw;
+      height: 48vw;
+      background: #ddd6fe;
     }
 
     .orb-3 {
       bottom: -20%;
       left: 30%;
-      width: 70vw;
-      height: 70vw;
-      background: #818cf8;
-      animation: float-slow 30s infinite alternate;
+      width: 56vw;
+      height: 56vw;
+      background: #e2e8f0;
     }
 
     /* Cursor Glow Effect */
@@ -138,43 +186,33 @@
       left: 0;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0) 70%);
+      background: radial-gradient(circle, rgba(4, 120, 87, 0.1) 0%, rgba(4, 120, 87, 0) 70%);
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      z-index: 9999;
+      z-index: 1;
       opacity: 0;
       transition: opacity 0.5s ease;
     }
 
-    /* Holographic Card Effect */
+    /* Cards — flat, deliberate, one elevation */
     .holo-card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow:
-        0 4px 6px -1px rgba(0, 0, 0, 0.02),
-        0 10px 15px -3px rgba(0, 0, 0, 0.03),
-        inset 0 0 20px rgba(255, 255, 255, 0.3);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-style: preserve-3d;
-      perspective: 1000px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--line);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
     .holo-card:hover {
-      background: rgba(255, 255, 255, 0.82);
-      border-color: rgba(139, 92, 246, 0.3);
-      box-shadow:
-        0 20px 25px -5px rgba(139, 92, 246, 0.1),
-        0 10px 10px -5px rgba(139, 92, 246, 0.04);
+      border-color: #a7f3d0;
+      box-shadow: 0 12px 28px -12px rgba(4, 120, 87, 0.22);
     }
 
-    /* Reveal on Scroll */
+    /* Reveal on Scroll — subtle, transform + opacity only */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .reveal.active {
@@ -182,19 +220,205 @@
       transform: translateY(0);
     }
 
-    /* Iridescent Text */
-    .text-iridescent {
-      background: linear-gradient(135deg, #0891b2 0%, #7c3aed 45%, #db2777 90%, #0891b2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% auto;
-      animation: shine 8s linear infinite;
+    /* Brand accent */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
     }
 
-    @keyframes shine {
-      to {
-        background-position: 200% center;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--accent-strong);
+      color: #fff;
+      box-shadow: 0 10px 24px -10px rgba(6, 95, 70, 0.5);
+    }
+    .btn-primary:hover {
+      background: #064e3b;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px -12px rgba(6, 95, 70, 0.55);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-secondary:hover {
+      border-color: #a7f3d0;
+      transform: translateY(-1px);
+    }
+    .btn-sm {
+      min-height: 44px;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+
+    /* Chat mock — the real artifact */
+    .chat-shell {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px -24px rgba(15, 23, 42, 0.22);
+      overflow: hidden;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #f8fafc;
+    }
+    .chat-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .chat-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(4,120,87,0.06), transparent 50%),
+        #fff;
+    }
+    .bubble {
+      max-width: 88%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .bubble-in {
+      background: #f1f5f9;
+      color: var(--ink);
+      border-bottom-left-radius: 6px;
+      align-self: flex-start;
+    }
+    .bubble-out {
+      background: var(--accent-soft);
+      border: 1px solid #a7f3d0;
+      color: #064e3b;
+      border-bottom-right-radius: 6px;
+      align-self: flex-end;
+    }
+    .bubble-meta {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    .check-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .check-list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .check-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid #a7f3d0;
+      color: var(--accent-strong);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", "Inter", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+    .faq-answer.open {
+      grid-template-rows: 1fr;
+    }
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+    .faq-toggle svg.chevron {
+      transition: transform 0.3s ease;
+    }
+    .faq-toggle[aria-expanded="true"] svg.chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Sticky mobile CTA — thumb zone */
+    .sticky-cta {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 60;
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta {
+        display: block;
+      }
+      body {
+        padding-bottom: 84px;
       }
     }
 
@@ -213,58 +437,35 @@
       background: #94a3b8;
     }
 
-    /* Mobile Optimizations */
+    /* Mobile */
     @media (max-width: 768px) {
-      .holo-card {
-        transition: all 0.3s ease;
-      }
-      
-      .tilt-element {
-        transform: none !important;
-      }
-      
-      .tilt-element:hover {
-        transform: none !important;
-      }
-      
-      /* Better touch targets */
-      button, a {
-        min-height: 44px;
-        min-width: 44px;
-      }
-      
       .faq-toggle {
-        padding: 1rem;
+        padding: 0.25rem 0;
       }
-      
-      /* Reduce motion for mobile */
-      .orb {
-        animation-duration: 30s;
-      }
-      
+
       .cursor-glow {
         display: none;
       }
     }
-    
+
     /* High contrast mode support */
     @media (prefers-contrast: high) {
       .holo-card {
-        background: rgba(255, 255, 255, 0.9);
+        background: #fff;
         border: 2px solid #000;
       }
-      
-      .text-slate-600 {
-        color: #000;
-      }
     }
-    
+
     /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -289,9 +490,6 @@
   <meta property="twitter:description" content="Junte-se à maior comunidade brasileira de Inteligência Artificial. Aprenda, ensine e compartilhe conhecimento sobre IA. Grupo gratuito." />
   <meta property="twitter:image" content="https://versatile-intelligence.vercel.app/public/images/logo-comunidade.webp" />
   <meta property="twitter:image:alt" content="Logo da comunidade Inteligência Versátil" />
-  
-  <!-- Three.js CDN (Loaded asynchronously to optimize LCP and support file:// offline use) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <!-- Schema.org JSON-LD (Unified Organization & FAQPage for GEO / LLM optimization) -->
   <script type="application/ld+json">
@@ -323,40 +521,6 @@
         "Machine Learning",
         "Aprendizado de Máquina",
         "Processamento de Linguagem Natural"
-      ],
-      "member": [
-        {
-          "@type": "Person",
-          "name": "Rafael Alves da Silva",
-          "alternateName": ["Prof. Rafael Alves", "Rafael Alves"],
-          "jobTitle": "Educador, Historiador e Especialista em Inovação Educacional com IA",
-          "roleName": "Administrador da Comunidade",
-          "url": "https://professorrafaelalves.com/",
-          "sameAs": [
-            "https://www.linkedin.com/in/profrafaalves/",
-            "https://x.com/breno94es/status/2096680274637844547"
-          ],
-          "worksFor": [
-            {
-              "@type": "EducationalOrganization",
-              "name": "Escola SESI João Ubaldo Ribeiro",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Luís Eduardo Magalhães",
-                "addressRegion": "BA",
-                "addressCountry": "BR"
-              },
-              "parentOrganization": {
-                "@type": "Organization",
-                "name": "Rede FIEB/SESI"
-              }
-            },
-            {
-              "@type": "Organization",
-              "name": "Departamento Nacional do SESI (SESI-DN)"
-            }
-          ]
-        }
       ]
     },
     {
@@ -408,7 +572,7 @@
           "name": "Quem administra e modera a comunidade Inteligência Versátil?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A moderação e administração da comunidade conta com educadores e pesquisadores de destaque nacional, como o Professor Rafael Alves da Silva (docente da Escola SESI João Ubaldo Ribeiro, formador do SESI Nacional, Microsoft Innovative Educator Expert e palestrante da Bett Brasil), garantindo um ecossistema ético, plural e focado na troca qualificada de conhecimento."
+            "text": "A moderação e administração da comunidade garante um ecossistema ético, plural e focado na troca qualificada de conhecimento."
           }
         }
       ]
@@ -432,44 +596,38 @@
   </script>
 </head>
 
-<body class="text-slate-800 font-sans min-h-screen relative selection:bg-fuchsia-400 selection:text-white">
+<body class="font-sans min-h-screen relative selection:bg-emerald-200 selection:text-emerald-950">
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- Background Fallback (CSS) -->
-  <div class="radiant-bg">
+  <div class="radiant-bg" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- WebGL Neural Background Canvas -->
-  <canvas id="webgl-bg-canvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none transition-opacity duration-1000 opacity-0"></canvas>
-
-  <div class="cursor-glow" id="cursor-glow"></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header class="fixed top-4 w-full z-50" role="banner">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="holo-card rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
-        <div class="flex items-center gap-3">
+  <header class="fixed top-3 sm:top-4 inset-x-0 z-50" role="banner">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="holo-card rounded-2xl px-4 sm:px-5 py-2.5 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
           <img src="public/images/logo-comunidade.webp" alt="Logo da Comunidade Inteligência Versátil"
-            class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" loading="lazy">
-          <span class="font-display font-bold text-lg tracking-tight text-slate-800">
+            class="w-9 h-9 rounded-full object-cover border border-slate-200 shadow-sm" loading="lazy" width="36" height="36">
+          <span class="font-display font-bold text-base tracking-tight text-slate-900 truncate">
             Inteligência Versátil
           </span>
+          <span class="hidden md:inline-flex text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1">WhatsApp</span>
         </div>
 
         <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
-          class="hidden sm:inline-flex group relative overflow-hidden items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full hover:from-emerald-500 hover:to-teal-600 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+          class="btn btn-primary btn-sm"
           aria-label="Participar do grupo no WhatsApp">
-          <!-- Visual Shine Effect -->
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform ease-in-out">
-          </div>
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path
               d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
-            <path
-              d="M20.52 3.48A11.958 11.958 0 0 0 12 0C5.373 0 0 5.373 0 12c0 2.12.553 4.197 1.6 6.04L0 24l6.184-1.584A11.96 11.96 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.193-1.246-6.197-3.48-8.52zM12 22c-1.885 0-3.73-.488-5.34-1.414l-.381-.217-3.673.942.982-3.584-.247-.369C2.488 15.73 2 13.885 2 12 2 6.486 6.486 2 12 2c2.403 0 4.66.936 6.364 2.636A8.963 8.963 0 0 1 22 12c0 5.514-4.486 10-10 10z" />
           </svg>
           Participar do Grupo
         </a>
@@ -477,1166 +635,403 @@
     </div>
   </header>
 
-  <main class="flex-1 flex flex-col pt-32 pb-20 px-4 sm:px-6 relative max-w-6xl mx-auto w-full" role="main">
+  <main id="conteudo" class="flex-1 flex flex-col pt-28 sm:pt-32 pb-20 px-4 sm:px-6 relative max-w-6xl mx-auto w-full" role="main">
 
-    <!-- Hero Section with Asymmetric Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-20 md:mb-32">
+    <!-- Hero -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-center mb-16 md:mb-24">
       <!-- Text Side -->
-      <div class="md:col-span-7 space-y-8 text-left">
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 backdrop-blur-md border border-white text-fuchsia-600 text-xs font-bold uppercase tracking-widest shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-fuchsia-500 animate-pulse"></span>
-          Comunidade Colaborativa
-        </div>
+      <div class="md:col-span-6 space-y-6 text-left">
+        <span class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Comunidade gratuita no WhatsApp</span>
 
-        <h1 class="font-display text-5xl md:text-7xl lg:text-8xl text-slate-900 leading-[0.95] tracking-tight">
-          Inteligência <br />
-          <span class="text-iridescent">Versátil</span>
+        <h1 class="section-title text-5xl md:text-6xl lg:text-7xl">
+          Inteligência<br>Versátil
         </h1>
 
-        <p class="text-xl md:text-2xl text-slate-600 font-light leading-relaxed max-w-lg">
-          Um espaço democrático para aprender, ensinar e debater sobre Inteligência Artificial. Conecte-se com pessoas
-          de diversas áreas e níveis de conhecimento.
+        <p class="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl" style="max-width: 38rem;">
+          Aprenda IA generativa na prática com gente de verdade. Prompts, ChatGPT, Midjourney e networking diário, sem taxa e sem pré-requisito.
         </p>
 
-        <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
-          class="inline-flex items-center justify-center relative overflow-hidden gap-3 px-8 py-4 text-lg font-bold text-white bg-slate-900 rounded-full hover:bg-slate-800 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-1 group focus:outline-none focus:ring-4 focus:ring-purple-300"
-          aria-label="Junte-se ao grupo de Inteligência Artificial no WhatsApp">
-          <!-- Visual Shine Effect -->
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform ease-in-out">
-          </div>
-          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
-            <path
-              d="M20.52 3.48A11.958 11.958 0 0 0 12 0C5.373 0 0 5.373 0 12c0 2.12.553 4.197 1.6 6.04L0 24l6.184-1.584A11.96 11.96 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.193-1.246-6.197-3.48-8.52zM12 22c-1.885 0-3.73-.488-5.34-1.414l-.381-.217-3.673.942.982-3.584-.247-.369C2.488 15.73 2 13.885 2 12 2 6.486 6.486 2 12 2c2.403 0 4.66.936 6.364 2.636A8.963 8.963 0 0 1 22 12c0 5.514-4.486 10-10 10z" />
-          </svg>
-          <span class="relative mr-1">
-            Quero Participar
-            <span
-              class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-fuchsia-500 via-white to-fuchsia-500 group-hover:w-full transition-all duration-1000 ease-in-out opacity-80 shadow-[0_0_8px_rgba(217,70,239,0.5)]"></span>
-          </span>
-        </a>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
+          <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
+            class="btn btn-primary"
+            aria-label="Junte-se ao grupo de Inteligência Artificial no WhatsApp">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            </svg>
+            Quero participar
+          </a>
+          <a href="#como-funciona"
+            class="btn btn-secondary">
+            Ver como funciona
+          </a>
+        </div>
+
+        <ul class="check-list pt-1" aria-label="Benefícios da comunidade">
+          <li><span class="check-badge" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>100% gratuito</li>
+          <li><span class="check-badge" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Todos os níveis</li>
+          <li><span class="check-badge" aria-hidden="true"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Moderação ativa</li>
+        </ul>
+        <p class="text-sm text-slate-500">Entre pelo celular ou computador. Sem cadastro, sem mensalidade.</p>
       </div>
 
-      <!-- Visual Side (Original UI with 3D WebGL Background) -->
-      <div class="md:col-span-5 relative hidden md:block reveal">
-        <div class="relative w-full aspect-square">
-          <!-- Background Glow -->
-          <div
-            class="absolute inset-0 bg-gradient-to-tr from-cyan-400 via-fuchsia-400 to-yellow-300 rounded-full blur-2xl opacity-40 animate-pulse-glow">
+      <!-- Visual Side: real artifact — WhatsApp conversation -->
+      <div class="md:col-span-6 relative reveal">
+        <div class="chat-shell" role="img" aria-label="Exemplo de conversa da comunidade Inteligência Versátil no WhatsApp, com troca de prompts e dicas de IA">
+          <div class="chat-header">
+            <div class="chat-avatar" aria-hidden="true">IV</div>
+            <div class="min-w-0">
+              <p class="font-bold text-slate-900 text-[15px] leading-tight truncate">Inteligência Versátil</p>
+              <p class="text-xs text-slate-500 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" aria-hidden="true"></span>Grupo no WhatsApp · 1.240 membros</p>
+            </div>
           </div>
-          <!-- Interactive Card -->
-          <div
-            id="hero-interactive-card"
-            class="holo-card w-full h-full rounded-[2rem] flex flex-col items-center justify-center p-8 rotate-3 hover:rotate-0 transition-all duration-500 relative overflow-hidden tilt-element">
-            
-            <!-- Original Content (rendered on top of WebGL canvas) -->
-            <div class="text-center space-y-4 relative z-10 pointer-events-none select-none">
-              <div class="text-6xl animate-bounce">✨</div>
-              <h3 class="font-display text-2xl font-bold text-slate-800">Conhecimento <br> & Conexão</h3>
-              <div class="flex justify-center -space-x-4">
-                <div class="w-12 h-12 rounded-full border-4 border-white bg-cyan-200"></div>
-                <div class="w-12 h-12 rounded-full border-4 border-white bg-fuchsia-200"></div>
-                <div
-                  class="w-12 h-12 rounded-full border-4 border-white bg-yellow-200 flex items-center justify-center font-bold text-xs ring-2 ring-white">
-                  +99</div>
-              </div>
-            </div>
-
-            <!-- WebGL Canvas (background layers, fade in when loaded) -->
-            <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full opacity-0 transition-opacity duration-700 block pointer-events-auto cursor-grab active:cursor-grabbing z-0"></canvas>
-
-            <!-- Interactive Hint Badge (fades in if WebGL loads) -->
-            <div id="hero-3d-hint" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-bold text-slate-400 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm pointer-events-none opacity-0 transition-opacity duration-700 z-10 flex items-center gap-1.5 uppercase tracking-wider">
-              <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
-              Mova o mouse para interagir
-            </div>
+          <div class="chat-body">
+            <div class="bubble bubble-in">Alguém tem um prompt bom para resumir artigos longos no ChatGPT?<span class="bubble-meta">Mariana · 09:12</span></div>
+            <div class="bubble bubble-out">Uso este modelo: resumo em tópicos + 3 insights práticos. Quer que eu te mande?<span class="bubble-meta">Admin · 09:14</span></div>
+            <div class="bubble bubble-in">Testei no Claude dividindo em 3 blocos. O resultado ficou bem melhor.<span class="bubble-meta">Diego · 09:15</span></div>
+            <div class="bubble bubble-out">Guia de Midjourney que prometi ontem está fixado no topo.<span class="bubble-meta">Admin · 09:18</span></div>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <span class="flex-1 text-sm text-slate-400 bg-white border border-slate-200 rounded-full px-4 py-2.5">Escreva uma mensagem…</span>
+            <span class="w-10 h-10 rounded-full bg-emerald-700 text-white flex items-center justify-center flex-shrink-0" aria-hidden="true"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg></span>
           </div>
         </div>
+        <p class="text-center text-xs text-slate-500 mt-3">Troca real do grupo: tutoriais, prompts e ajuda diária.</p>
       </div>
     </div>
 
-    <!-- GEO Optimization: Quick Facts structured in highly aesthetic glassmorphism cards -->
-    <section class="mb-24 reveal" aria-labelledby="quick-facts-title">
-      <div class="max-w-5xl mx-auto">
-        <h2 id="quick-facts-title" class="font-display text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center flex items-center justify-center gap-2.5">
-          DNA da Comunidade
+    <!-- Como funciona -->
+    <section id="como-funciona" class="mb-16 md:mb-20 reveal scroll-mt-28" aria-labelledby="como-funciona-title">
+      <div class="max-w-5xl mx-auto text-center mb-8">
+        <span class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Sobre o grupo</span>
+        <h2 id="como-funciona-title" class="section-title text-3xl md:text-4xl mt-4">
+          O grupo, em 30 segundos
         </h2>
-        
-        <!-- Description List for perfect semantic LLM parsing (GEO) & Responsive layout for premium UI -->
-        <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          <!-- Card 1: Nome Oficial -->
-          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-purple-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-100/30 transition-all duration-300 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-lg text-white shadow-md shadow-fuchsia-200/50 flex-shrink-0">
-              ✨
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Nome Oficial</dt>
-              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">Comunidade Inteligência Versátil</dd>
-            </div>
-          </div>
-
-          <!-- Card 2: Tipo de Acesso -->
-          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-emerald-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-100/30 transition-all duration-300 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-lg text-white shadow-md shadow-emerald-200/50 flex-shrink-0">
-              🎁
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tipo de Acesso</dt>
-              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">
-                <span class="inline-block px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wide mr-1.5 shadow-sm">100% Gratuito</span>
-                Sem taxas ou assinaturas
-              </dd>
-            </div>
-          </div>
-
-          <!-- Card 3: Plataforma e Canal -->
-          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-cyan-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-100/30 transition-all duration-300 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-lg text-white shadow-md shadow-cyan-200/50 flex-shrink-0">
-              💬
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Canal Oficial</dt>
-              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">Grupo de Discussão no WhatsApp</dd>
-            </div>
-          </div>
-
-          <!-- Card 4: Foco Temático -->
-          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-violet-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-violet-100/30 transition-all duration-300 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-lg text-white shadow-md shadow-violet-200/50 flex-shrink-0">
-              🧠
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tópicos Principais</dt>
-              <dd class="text-sm font-bold text-slate-800 mt-1 leading-snug">IA Generativa, ChatGPT, Claude, Midjourney, Prompt Engineering e Machine Learning</dd>
-            </div>
-          </div>
-
-          <!-- Card 5: Região e Idioma -->
-          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-blue-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-100/30 transition-all duration-300 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-lg text-white shadow-md shadow-blue-200/50 flex-shrink-0">
-              🌐
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Região e Idioma</dt>
-              <dd class="text-base font-bold text-slate-800 mt-1 leading-snug">Brasil (Língua Portuguesa - pt-BR)</dd>
-            </div>
-          </div>
-
-          <!-- Card 6: Público-Alvo -->
-          <div class="holo-card rounded-2xl p-6 border border-white/60 bg-white/40 backdrop-blur-md hover:border-amber-300 hover:bg-white/65 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-100/30 transition-all duration-300 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-lg text-white shadow-md shadow-amber-200/50 flex-shrink-0">
-              👥
-            </div>
-            <div>
-              <dt class="text-xs font-bold text-slate-400 uppercase tracking-wider">Público-Alvo</dt>
-              <dd class="text-sm font-bold text-slate-800 mt-1 leading-snug">Iniciantes, designers, copywriters, desenvolvedores e profissionais de TI</dd>
-            </div>
-          </div>
-
-        </dl>
+        <p class="text-slate-600 mt-3 max-w-2xl mx-auto leading-relaxed">
+          Comunidade aberta no WhatsApp para aprender IA generativa com trocas diárias.
+        </p>
       </div>
+
+      <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="holo-card rounded-2xl p-5 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">G</div>
+          <div>
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider">Acesso</dt>
+            <dd class="text-[15px] font-bold text-slate-900 mt-1 leading-snug">100% gratuito, sem taxa ou assinatura</dd>
+          </div>
+        </div>
+
+        <div class="holo-card rounded-2xl p-5 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">W</div>
+          <div>
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider">Onde</dt>
+            <dd class="text-[15px] font-bold text-slate-900 mt-1 leading-snug">Grupo de discussão no WhatsApp</dd>
+          </div>
+        </div>
+
+        <div class="holo-card rounded-2xl p-5 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">IA</div>
+          <div>
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider">Temas</dt>
+            <dd class="text-[15px] font-bold text-slate-900 mt-1 leading-snug">ChatGPT, Claude, Midjourney e prompts</dd>
+          </div>
+        </div>
+
+        <div class="holo-card rounded-2xl p-5 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">BR</div>
+          <div>
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider">Idioma</dt>
+            <dd class="text-[15px] font-bold text-slate-900 mt-1 leading-snug">Português, Brasil</dd>
+          </div>
+        </div>
+
+        <div class="holo-card rounded-2xl p-5 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">+</div>
+          <div>
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider">Para quem</dt>
+            <dd class="text-[15px] font-bold text-slate-900 mt-1 leading-snug">Iniciantes e profissionais</dd>
+          </div>
+        </div>
+
+        <div class="holo-card rounded-2xl p-5 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold flex-shrink-0" aria-hidden="true">✓</div>
+          <div>
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider">Ambiente</dt>
+            <dd class="text-[15px] font-bold text-slate-900 mt-1 leading-snug">Moderado, respeitoso e prático</dd>
+          </div>
+        </div>
+      </dl>
     </section>
 
-    <!-- Bento Grid Intro -->
-    <div class="text-center mb-12 reveal">
-      <h2 class="font-display text-3xl md:text-5xl font-bold text-slate-900">Juntos vamos mais longe</h2>
-      <p class="text-slate-500 mt-4 max-w-2xl mx-auto">O conhecimento se multiplica quando é compartilhado.</p>
-    </div>
-
-    <!-- The Bento Grid Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(180px,auto)]">
-
-      <!-- Big Card: Intro (BLUF Optimized) -->
-      <div class="holo-card rounded-3xl p-8 md:col-span-2 lg:col-span-2 flex flex-col justify-center reveal tilt-element">
-        <h3 class="font-display text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-          <span class="text-3xl">🚀</span> Propósito
-        </h3>
-        <p class="text-slate-600 text-lg leading-relaxed">
-          <strong class="text-slate-900">A comunidade Inteligência Versátil é focada em conectar pessoas no Brasil para debater inteligência artificial.</strong> Acreditamos que a IA generativa é um catalisador tecnológico potente, mas o compartilhamento de conhecimento humano e o networking prático no grupo de WhatsApp oficial é o que realmente multiplica resultados e gera novas oportunidades.
-        </p>
+    <!-- Por que participar -->
+    <section class="mb-16 md:mb-20 reveal" aria-labelledby="beneficios-title">
+      <div class="max-w-5xl mx-auto text-center mb-8">
+        <span class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Benefícios</span>
+        <h2 id="beneficios-title" class="section-title text-3xl md:text-4xl mt-4">Por que participar</h2>
       </div>
 
-      <!-- Card: Content (BLUF Optimized) -->
-      <div class="holo-card rounded-3xl p-8 flex flex-col items-start gap-4 hover:bg-cyan-50/50 transition-colors">
-        <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl">📚</div>
-        <h4 class="font-display text-xl font-bold text-slate-800">Aprendizado Contínuo</h4>
-        <p class="text-slate-600">Acesse tutoriais, guias de prompt engineering e dicas práticas sobre ChatGPT e Midjourney compartilhados diariamente no grupo.</p>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-      <!-- Card: Debates (BLUF Optimized) -->
-      <div class="holo-card rounded-3xl p-8 flex flex-col items-start gap-4 hover:bg-fuchsia-50/50 transition-colors">
-        <div class="w-12 h-12 rounded-2xl bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center text-2xl">💬</div>
-        <h4 class="font-display text-xl font-bold text-slate-800">Networking e Troca</h4>
-        <p class="text-slate-600">Debata novidades de mercado, valide suas dúvidas técnicas de automação e compartilhe novidades tecnológicas com outros profissionais de IA.</p>
-      </div>
-
-      <!-- Card: Community (BLUF Optimized) -->
-      <div class="holo-card rounded-3xl p-8 flex flex-col items-start gap-4 hover:bg-yellow-50/50 transition-colors">
-        <div class="w-12 h-12 rounded-2xl bg-yellow-100 text-yellow-600 flex items-center justify-center text-2xl">🤝</div>
-        <h4 class="font-display text-xl font-bold text-slate-800">Diversidade Técnica</h4>
-        <p class="text-slate-600">Interaja com designers, redatores, programadores e analistas de marketing digital que aplicam IA em seus cotidianos profissionais.</p>
-      </div>
-
-      <!-- Card: Respect (BLUF Optimized) -->
-      <div
-        class="holo-card rounded-3xl p-8 md:col-span-2 lg:col-span-1 flex flex-col justify-center bg-gradient-to-br from-white to-violet-50">
-        <div class="flex items-center gap-3 mb-2">
-          <div class="w-10 h-10 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center">❤️</div>
-          <h4 class="font-display text-xl font-bold text-slate-800">Ambiente Seguro</h4>
-        </div>
-        <p class="text-lg font-medium text-slate-700">
-          Garantimos um ambiente de <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-fuchsia-500 font-bold">colaboração respeitosa</span>
-          onde todos os níveis de conhecimento são bem-vindos.
-        </p>
-      </div>
-
-    </div>
-
-    <!-- Community Spotlight / Leadership Dossier: Prof. Rafael Alves da Silva -->
-    <section class="mt-24 mb-20 reveal" id="dossie-lideranca" aria-labelledby="dossie-heading">
-      <div class="max-w-5xl mx-auto">
-        
-        <!-- Section Header & Badge -->
-        <div class="text-center mb-10">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-violet-200 text-violet-700 text-xs font-bold uppercase tracking-wider shadow-sm mb-4">
-            <span class="w-2 h-2 rounded-full bg-violet-600 animate-pulse"></span>
-            Liderança &amp; Administração da Comunidade
-          </div>
-          <h2 id="dossie-heading" class="font-display text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
-            Dossiê Biográfico: <span class="text-iridescent">Prof. Rafael Alves</span>
-          </h2>
-          <p class="text-slate-600 mt-3 max-w-2xl mx-auto text-base md:text-lg">
-            Educador, Historiador, Pesquisador e Especialista em Inovação Educacional com Inteligência Artificial. Membro ativo e administrador do grupo Inteligência Versátil.
+        <div class="holo-card rounded-2xl p-6 flex flex-col gap-3 md:col-span-1">
+          <h3 class="font-display text-xl font-bold text-slate-900">Aprenda na prática</h3>
+          <p class="text-slate-600 leading-relaxed">
+            <strong class="text-slate-900">Tutoriais e prompts prontos para usar.</strong> Guias de ChatGPT, Midjourney e engenharia de prompts compartilhados todos os dias.
           </p>
         </div>
 
-        <!-- 2-Column Responsive Layout: Bio & Credentials + Twitter/X Embed -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <!-- Left Column: Biography & Institutional Highlights (7 cols) -->
-          <div class="lg:col-span-7 space-y-6">
-            <div class="holo-card rounded-3xl p-8 border border-white/70 bg-white/50 backdrop-blur-xl shadow-lg relative overflow-hidden">
-              
-              <!-- Subtle decorative accent glow -->
-              <div class="absolute -top-16 -right-16 w-36 h-36 bg-gradient-to-br from-violet-400/20 to-cyan-400/20 rounded-full blur-2xl pointer-events-none"></div>
-
-              <!-- Admin Tag & Status -->
-              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-extrabold tracking-wide uppercase shadow-sm">
-                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                  Administrador Oficial do Grupo
-                </span>
-                <span class="text-xs font-semibold text-slate-500">Membro da Comunidade</span>
-              </div>
-
-              <h3 class="font-display text-2xl md:text-3xl font-bold text-slate-900 leading-tight">
-                Professor Rafael Alves da Silva
-              </h3>
-              <p class="text-sm font-bold text-violet-700 mt-1">
-                Ciências Humanas &bull; Inovação Educacional com IA &bull; Letramento Digital
-              </p>
-
-              <!-- Bio Content -->
-              <p class="text-slate-600 mt-4 leading-relaxed text-sm md:text-base">
-                O Prof. Rafael Alves é uma das vozes mais ativas do país na integração ética e pedagógica de ferramentas generativas na educação. Na comunidade <strong class="text-slate-800">Inteligência Versátil</strong>, ele atua como administrador, compartilhando reflexões epistemológicas, engenharia de prompts socrática e práticas inovadoras que impactam salas de aula em todo o território nacional.
-              </p>
-
-              <!-- Institutional Highlights List -->
-              <div class="mt-6 space-y-3">
-                <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/70 border border-slate-200/50 shadow-sm hover:bg-white/90 transition-colors">
-                  <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center text-xl flex-shrink-0">
-                    🏛️
-                  </div>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Atuação Docente</div>
-                    <div class="text-sm font-bold text-slate-800">Escola SESI João Ubaldo Ribeiro</div>
-                    <div class="text-xs text-slate-500">Luís Eduardo Magalhães (BA) &bull; Rede FIEB / SESI Bahia</div>
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/70 border border-slate-200/50 shadow-sm hover:bg-white/90 transition-colors">
-                  <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-xl flex-shrink-0">
-                    🎓
-                  </div>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Formação Docente Nacional</div>
-                    <div class="text-sm font-bold text-slate-800">SESI Departamento Nacional (SESI-DN)</div>
-                    <div class="text-xs text-slate-500">Formador no Núcleo de Formação Docente e Mentoria</div>
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/70 border border-slate-200/50 shadow-sm hover:bg-white/90 transition-colors">
-                  <div class="w-10 h-10 rounded-xl bg-fuchsia-100 text-fuchsia-700 flex items-center justify-center text-xl flex-shrink-0">
-                    ⭐
-                  </div>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Reconhecimentos &amp; Inovação</div>
-                    <div class="text-sm font-bold text-slate-800">Microsoft MIEE Expert &bull; Palestrante Bett Brasil 2026</div>
-                    <div class="text-xs text-slate-500">Idealizador do premiado projeto <em>IA Afro-Indígena</em> (Destaque G1 Globo &amp; University of Maryland)</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Action Links & CTAs -->
-              <div class="mt-8 flex flex-wrap items-center gap-3">
-                <a href="https://professorrafaelalves.com/" target="_blank" rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full hover:from-violet-700 hover:to-indigo-700 shadow-md hover:shadow-lg hover:shadow-violet-500/20 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-violet-300"
-                  aria-label="Conhecer website oficial do Professor Rafael Alves">
-                  <span>Conhecer Website Oficial</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                  </svg>
-                </a>
-
-                <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
-                  class="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-full shadow-sm hover:shadow transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                  aria-label="Interagir com o professor e outros membros no grupo de WhatsApp">
-                  <span>Interagir no Grupo</span>
-                  <svg class="w-4 h-4 text-emerald-500 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                  </svg>
-                </a>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Right Column: Twitter / X Embed Container (5 cols) -->
-          <div class="lg:col-span-5 w-full">
-            <div class="holo-card rounded-3xl p-6 border border-white/70 bg-white/50 backdrop-blur-xl shadow-lg">
-              
-              <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/60">
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-slate-800" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                  <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Dossiê no X (Twitter)</span>
-                </div>
-                <span class="text-[11px] font-semibold text-slate-400">@breno94es</span>
-              </div>
-
-              <!-- Tweet Widget Embed Code (Preserving exact code provided by user) -->
-              <div class="flex justify-center w-full min-h-[350px] overflow-x-auto">
-                <blockquote class="twitter-tweet" data-dnt="true" data-theme="light" data-align="center"><p lang="zxx" dir="ltr"><a href="https://t.co/1OU4calJeU">https://t.co/1OU4calJeU</a></p>&mdash; Breno (@breno94es) <a href="https://x.com/breno94es/status/2096680274637844547?ref_src=twsrc%5Etfw">September 6, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
-              </div>
-
-              <div class="mt-4 pt-3 border-t border-slate-200/60 text-center">
-                <a href="https://x.com/breno94es/status/2096680274637844547" target="_blank" rel="noopener noreferrer"
-                  class="text-xs font-semibold text-violet-600 hover:text-violet-800 inline-flex items-center gap-1 transition-colors">
-                  <span>Abrir publicação e dossiê no X</span>
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                  </svg>
-                </a>
-              </div>
-
-            </div>
-          </div>
-
+        <div class="holo-card rounded-2xl p-6 flex flex-col gap-3">
+          <h3 class="font-display text-xl font-bold text-slate-900">Tire dúvidas rápido</h3>
+          <p class="text-slate-600 leading-relaxed">Pergunte e receba ajuda de quem já usa IA no trabalho, de automação a dúvidas de mercado.</p>
         </div>
+
+        <div class="holo-card rounded-2xl p-6 flex flex-col gap-3">
+          <h3 class="font-display text-xl font-bold text-slate-900">Faça networking</h3>
+          <p class="text-slate-600 leading-relaxed">Conecte-se com designers, redatores, devs e marketing que aplicam IA todo dia.</p>
+        </div>
+
       </div>
     </section>
 
-    <!-- FAQ Section (GEO & Q&A Optimized for LLMs and Conversational Search) -->
-    <section class="mt-20 mb-12" aria-labelledby="faq-heading">
-      <div class="text-center mb-12 reveal">
-        <h2 id="faq-heading" class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-          Perguntas Frequentes sobre a Comunidade
+    <!-- FAQ -->
+    <section class="mt-16 mb-10 scroll-mt-28" aria-labelledby="faq-heading">
+      <div class="text-center mb-8 reveal">
+        <span class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Dúvidas comuns</span>
+        <h2 id="faq-heading" class="section-title text-3xl md:text-4xl mt-4">
+          Perguntas frequentes
         </h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
-          Respostas rápidas e objetivas para as principais dúvidas sobre o grupo Inteligência Versátil.
-        </p>
       </div>
 
-      <div class="max-w-4xl mx-auto space-y-4">
+      <div class="max-w-3xl mx-auto space-y-3">
         <!-- FAQ Item 1 -->
-        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
-          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+        <div class="holo-card rounded-2xl px-5 py-4 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 faq-toggle"
                   aria-expanded="false" aria-controls="faq-answer-1">
-            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
-              <span class="text-2xl">🤔</span>
-              A comunidade de Inteligência Artificial do Inteligência Versátil é gratuita?
-            </h3>
-            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+            <span class="font-display text-[17px] font-semibold text-slate-900" itemprop="name">
+              A comunidade é gratuita?
+            </span>
+            <svg class="chevron w-5 h-5 text-slate-500 flex-shrink-0"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div id="faq-answer-1" class="hidden mt-4 text-slate-600 leading-relaxed" 
+          <div id="faq-answer-1" class="faq-answer mt-1 text-slate-600 leading-relaxed"
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
-            <p itemprop="text">
-              <strong>Sim, a comunidade Inteligência Versátil é 100% gratuita.</strong> Não cobramos taxa de adesão ou mensalidades para participar do nosso grupo oficial de networking e aprendizado de IA generativa no WhatsApp.
-            </p>
+            <div class="faq-answer-inner"><p class="pt-2" itemprop="text">
+              Sim, 100% gratuita. Sem taxa de adesão ou mensalidade para participar do grupo no WhatsApp.
+            </p></div>
           </div>
         </div>
 
         <!-- FAQ Item 2 -->
-        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
-          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+        <div class="holo-card rounded-2xl px-5 py-4 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 faq-toggle"
                   aria-expanded="false" aria-controls="faq-answer-2">
-            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
-              <span class="text-2xl">👥</span>
-              Quem pode participar do grupo de WhatsApp do Inteligência Versátil?
-            </h3>
-            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+            <span class="font-display text-[17px] font-semibold text-slate-900" itemprop="name">
+              Quem pode participar?
+            </span>
+            <svg class="chevron w-5 h-5 text-slate-500 flex-shrink-0"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div id="faq-answer-2" class="hidden mt-4 text-slate-600 leading-relaxed" 
+          <div id="faq-answer-2" class="faq-answer mt-1 text-slate-600 leading-relaxed"
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
-            <p itemprop="text">
-              <strong>Qualquer pessoa interessada em inteligência artificial e tecnologia pode participar do grupo.</strong> Nosso ecossistema atrai programadores, designers de interfaces, profissionais de marketing, copywriters, estudantes e especialistas em Machine Learning e engenharia de prompts.
-            </p>
+            <div class="faq-answer-inner"><p class="pt-2" itemprop="text">
+              Qualquer pessoa interessada em IA: programadores, designers, marketing, copywriters, estudantes e especialistas.
+            </p></div>
           </div>
         </div>
 
         <!-- FAQ Item 3 -->
-        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
-          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+        <div class="holo-card rounded-2xl px-5 py-4 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 faq-toggle"
                   aria-expanded="false" aria-controls="faq-answer-3">
-            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
-              <span class="text-2xl">💡</span>
-              Quais tópicos sobre inteligência artificial são discutidos na comunidade?
-            </h3>
-            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+            <span class="font-display text-[17px] font-semibold text-slate-900" itemprop="name">
+              O que é discutido no grupo?
+            </span>
+            <svg class="chevron w-5 h-5 text-slate-500 flex-shrink-0"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div id="faq-answer-3" class="hidden mt-4 text-slate-600 leading-relaxed" 
+          <div id="faq-answer-3" class="faq-answer mt-1 text-slate-600 leading-relaxed"
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
-            <p itemprop="text">
-              <strong>Discutimos IA generativa, engenharia de prompts, ferramentas práticas e automação.</strong> Os assuntos cobrem a utilização do ChatGPT, Claude, Midjourney e Stable Diffusion, assim como técnicas avançadas de Prompt Engineering, desenvolvimento com APIs de IA, novidades de mercado e reflexões éticas.
-            </p>
+            <div class="faq-answer-inner"><p class="pt-2" itemprop="text">
+              IA generativa, prompts, ChatGPT, Claude, Midjourney, automação e novidades do mercado.
+            </p></div>
           </div>
         </div>
 
         <!-- FAQ Item 4 -->
-        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
-          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+        <div class="holo-card rounded-2xl px-5 py-4 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 faq-toggle"
                   aria-expanded="false" aria-controls="faq-answer-4">
-            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
-              <span class="text-2xl">📱</span>
-              Como faço para entrar no grupo de WhatsApp oficial da Inteligência Versátil?
-            </h3>
-            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+            <span class="font-display text-[17px] font-semibold text-slate-900" itemprop="name">
+              Como entro no grupo?
+            </span>
+            <svg class="chevron w-5 h-5 text-slate-500 flex-shrink-0"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div id="faq-answer-4" class="hidden mt-4 text-slate-600 leading-relaxed" 
+          <div id="faq-answer-4" class="faq-answer mt-1 text-slate-600 leading-relaxed"
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
-            <p itemprop="text">
-              <strong>Para entrar na comunidade, basta clicar em qualquer botão de convite da página.</strong> Clique no botão "Quero Participar" ou "Participar do Grupo" para ser redirecionado de forma segura e imediata para o convite de entrada do grupo oficial do WhatsApp.
-            </p>
+            <div class="faq-answer-inner"><p class="pt-2" itemprop="text">
+              Clique em qualquer botão de convite desta página para abrir o grupo oficial no WhatsApp.
+            </p></div>
           </div>
         </div>
 
         <!-- FAQ Item 5 -->
-        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
-          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+        <div class="holo-card rounded-2xl px-5 py-4 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 faq-toggle"
                   aria-expanded="false" aria-controls="faq-answer-5">
-            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
-              <span class="text-2xl">📚</span>
-              É necessário ter algum conhecimento técnico prévio para se juntar à comunidade?
-            </h3>
-            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+            <span class="font-display text-[17px] font-semibold text-slate-900" itemprop="name">
+              Preciso saber programar?
+            </span>
+            <svg class="chevron w-5 h-5 text-slate-500 flex-shrink-0"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div id="faq-answer-5" class="hidden mt-4 text-slate-600 leading-relaxed" 
+          <div id="faq-answer-5" class="faq-answer mt-1 text-slate-600 leading-relaxed"
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
-            <p itemprop="text">
-              <strong>Não, não é exigido nenhum nível mínimo de conhecimento em IA ou programação.</strong> Nosso grupo é inclusivo e feito para todos os níveis de experiência, desde iniciantes que querem dar seus primeiros passos com IA até especialistas experientes que compartilham insights valiosos.
-            </p>
+            <div class="faq-answer-inner"><p class="pt-2" itemprop="text">
+              Não. O grupo recebe todos os níveis, de iniciantes a especialistas.
+            </p></div>
           </div>
         </div>
 
         <!-- FAQ Item 6 -->
-        <div class="holo-card rounded-2xl p-6 reveal" itemscope itemtype="https://schema.org/Question">
-          <button class="w-full text-left flex items-center justify-between gap-4 group faq-toggle"
+        <div class="holo-card rounded-2xl px-5 py-4 reveal" itemscope itemtype="https://schema.org/Question">
+          <button class="w-full text-left flex items-center justify-between gap-4 faq-toggle"
                   aria-expanded="false" aria-controls="faq-answer-6">
-            <h3 class="font-display text-lg font-semibold text-slate-800 flex items-center gap-3" itemprop="name">
-              <span class="text-2xl">🛡️</span>
-              Quem administra e modera a comunidade Inteligência Versátil?
-            </h3>
-            <svg class="w-5 h-5 text-slate-500 transition-transform duration-300 group-rotate-180" 
+            <span class="font-display text-[17px] font-semibold text-slate-900" itemprop="name">
+              Quem modera a comunidade?
+            </span>
+            <svg class="chevron w-5 h-5 text-slate-500 flex-shrink-0"
                  fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div id="faq-answer-6" class="hidden mt-4 text-slate-600 leading-relaxed" 
+          <div id="faq-answer-6" class="faq-answer mt-1 text-slate-600 leading-relaxed"
                itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
-            <p itemprop="text">
-              <strong>A comunidade conta com a moderação ativa de educadores e pesquisadores de destaque nacional, como o Professor Rafael Alves da Silva.</strong> Docente na Escola SESI João Ubaldo Ribeiro, formador do SESI Nacional, Microsoft Innovative Educator Expert (MIEE) e palestrante da Bett Brasil, o Prof. Rafael atua como administrador do grupo, assegurando um ambiente respeitoso, ético e fundamentado em inovação tecnológica real.
-            </p>
+            <div class="faq-answer-inner"><p class="pt-2" itemprop="text">
+              Nossa equipe de moderação mantém um ambiente respeitoso, ético e focado em aprendizado.
+            </p></div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="mt-12 mb-6 reveal" aria-labelledby="cta-final-title">
+      <div class="max-w-3xl mx-auto text-center rounded-3xl border border-emerald-900 bg-emerald-950 text-white px-6 py-10 sm:px-10">
+        <h2 id="cta-final-title" class="font-display text-3xl md:text-4xl font-bold tracking-tight">Comece a aprender IA hoje</h2>
+        <p class="text-emerald-100/90 mt-3 max-w-xl mx-auto leading-relaxed">Entre no grupo gratuito e receba prompts, tutoriais e ajuda da comunidade.</p>
+        <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
+          class="btn mt-6 bg-white text-emerald-950 hover:bg-emerald-50"
+          aria-label="Entrar no grupo Inteligência Versátil no WhatsApp">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          </svg>
+          Entrar no grupo gratuito
+        </a>
       </div>
     </section>
 
   </main>
 
+  <!-- CTA fixo no mobile -->
+  <div class="sticky-cta px-1">
+    <a href="https://chat.whatsapp.com/CfAnDJPIjBkHASUUSF1H2H" target="_blank" rel="noopener"
+      class="btn btn-primary w-full shadow-xl"
+      aria-label="Entrar no grupo Inteligência Versátil no WhatsApp">
+      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.472-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.2 5.077 4.366.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z" />
+      </svg>
+      Entrar no grupo gratuito
+    </a>
+  </div>
+
   <script>
-    // Global Performance Tracking & Visibility variables
-    let isPageVisible = true;
-    let isBgActive = false;
-    let isHeroActive = false;
-
-    // Visibility Listener to pause rendering loops when browser tab is inactive
-    document.addEventListener('visibilitychange', () => {
-      isPageVisible = document.visibilityState === 'visible';
-    });
-
-    // Initialize WebGL Effects if Three.js loaded successfully
-    window.addEventListener('load', () => {
-      if (typeof THREE !== 'undefined') {
-        initWebGLBackground();
-        initWebGLHero();
-      }
-    });
-
-    // 1. WebGL Neural Network Background Effect
-    function initWebGLBackground() {
-      const canvas = document.getElementById('webgl-bg-canvas');
-      if (!canvas) return;
-
-      // Renderer setup with performance optimizations (no antialias on points background to save CPU/GPU)
-      const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        alpha: true,
-        antialias: false,
-        powerPreference: 'high-performance'
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      const scene = new THREE.Scene();
-      
-      // Perspective camera to add realistic 3D depth to floating nodes
-      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-      camera.position.z = 400;
-
-      // Setup 120 particles in a 3D volume
-      const particleCount = 120;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const velocities = [];
-
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        // Random distribution in space
-        positions[i] = (Math.random() - 0.5) * window.innerWidth * 1.5;
-        positions[i + 1] = (Math.random() - 0.5) * window.innerHeight * 1.5;
-        positions[i + 2] = (Math.random() - 0.5) * 400; // Depth variation
-
-        // Velocity components
-        velocities.push({
-          x: (Math.random() - 0.5) * 0.4,
-          y: (Math.random() - 0.5) * 0.4,
-          z: (Math.random() - 0.5) * 0.2
-        });
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-      // Simple Point Material - Violet color mapped from theme (#8b5cf6)
-      const material = new THREE.PointsMaterial({
-        color: 0x8b5cf6,
-        size: 3.0,
-        transparent: true,
-        opacity: 0.45,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-
-      const points = new THREE.Points(geometry, material);
-      scene.add(points);
-
-      // Pre-allocated Line Geometry to prevent garbage collection spikes
-      const maxLines = 200;
-      const lineGeometry = new THREE.BufferGeometry();
-      const linePositions = new Float32Array(maxLines * 2 * 3); // 2 points per line, 3 coords
-      const lineColors = new Float32Array(maxLines * 2 * 4); // 2 colors per line, 4 components (RGBA)
-
-      lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-      lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 4));
-
-      const lineMaterial = new THREE.LineBasicMaterial({
-        vertexColors: true,
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-
-      const lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
-      scene.add(lineSegments);
-
-      // Mouse tracking for localized neural reaction
-      const mouse = { x: 0, y: 0, targetX: 0, targetY: 0, active: false };
-      
-      window.addEventListener('mousemove', (e) => {
-        // Convert screen coordinates to normalized device coordinates (-1 to +1)
-        mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
-        mouse.active = true;
-      });
-
-      window.addEventListener('mouseleave', () => {
-        mouse.active = false;
-      });
-
-      // Window resize adaptation
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      // Intersection Observer for Background Visibility Control
-      const bgObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          isBgActive = entry.isIntersecting;
-        });
-      }, { threshold: 0.01 });
-      bgObserver.observe(canvas);
-
-      // Render loop
-      function animate() {
-        requestAnimationFrame(animate);
-
-        // CPU/GPU Saver: Pause if tab is inactive or canvas is out of viewport
-        if (!isPageVisible || !isBgActive) return;
-
-        const posAttr = points.geometry.attributes.position;
-        const positionsArray = posAttr.array;
-
-        // Smooth mouse interpolations
-        mouse.x += (mouse.targetX - mouse.x) * 0.1;
-        mouse.y += (mouse.targetY - mouse.y) * 0.1;
-
-        // Transform mouse coords to 3D space near camera (Z = 0)
-        const vWidth = Math.tan(30 * Math.PI / 180) * 400 * 2 * camera.aspect;
-        const vHeight = Math.tan(30 * Math.PI / 180) * 400 * 2;
-        const mouse3D = {
-          x: mouse.x * vWidth / 2,
-          y: mouse.y * vHeight / 2
-        };
-
-        // Update particle positions
-        for (let i = 0; i < particleCount; i++) {
-          const idx = i * 3;
-          let px = positionsArray[idx];
-          let py = positionsArray[idx + 1];
-          let pz = positionsArray[idx + 2];
-
-          // Apply raw velocity
-          px += velocities[i].x;
-          py += velocities[i].y;
-          pz += velocities[i].z;
-
-          // Mouse influence (slight repulsing force near mouse)
-          if (mouse.active) {
-            const dx = px - mouse3D.x;
-            const dy = py - mouse3D.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
-              const force = (150 - dist) * 0.005;
-              px += (dx / dist) * force;
-              py += (dy / dist) * force;
-            }
-          }
-
-          // Boundary bouncing logic in 3D
-          const boundX = (window.innerWidth * 1.5) / 2;
-          const boundY = (window.innerHeight * 1.5) / 2;
-
-          if (Math.abs(px) > boundX) velocities[i].x *= -1;
-          if (Math.abs(py) > boundY) velocities[i].y *= -1;
-          if (Math.abs(pz) > 200) velocities[i].z *= -1;
-
-          positionsArray[idx] = px;
-          positionsArray[idx + 1] = py;
-          positionsArray[idx + 2] = pz;
-        }
-        posAttr.needsUpdate = true;
-
-        // Connect nearby nodes
-        const linePosAttr = lineGeometry.attributes.position;
-        const linePositionsArray = linePosAttr.array;
-        const lineColAttr = lineGeometry.attributes.color;
-        const lineColorsArray = lineColAttr.array;
-
-        let lineIdx = 0;
-        let colorIdx = 0;
-        let connections = 0;
-
-        for (let i = 0; i < particleCount && connections < maxLines; i++) {
-          const idxA = i * 3;
-          const ax = positionsArray[idxA];
-          const ay = positionsArray[idxA + 1];
-          const az = positionsArray[idxA + 2];
-
-          for (let j = i + 1; j < particleCount && connections < maxLines; j++) {
-            const idxB = j * 3;
-            const bx = positionsArray[idxB];
-            const by = positionsArray[idxB + 1];
-            const bz = positionsArray[idxB + 2];
-
-            const dx = ax - bx;
-            const dy = ay - by;
-            const dz = az - bz;
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-            // Connect if close enough
-            if (dist < 110) {
-              linePositionsArray[lineIdx++] = ax;
-              linePositionsArray[lineIdx++] = ay;
-              linePositionsArray[lineIdx++] = az;
-              linePositionsArray[lineIdx++] = bx;
-              linePositionsArray[lineIdx++] = by;
-              linePositionsArray[lineIdx++] = bz;
-
-              const alpha = (1 - (dist / 110)) * 0.22;
-
-              // Line colors (RGB: violet spectrum 139, 92, 246)
-              lineColorsArray[colorIdx++] = 139 / 255;
-              lineColorsArray[colorIdx++] = 92 / 255;
-              lineColorsArray[colorIdx++] = 246 / 255;
-              lineColorsArray[colorIdx++] = alpha;
-
-              lineColorsArray[colorIdx++] = 139 / 255;
-              lineColorsArray[colorIdx++] = 92 / 255;
-              lineColorsArray[colorIdx++] = 246 / 255;
-              lineColorsArray[colorIdx++] = alpha;
-
-              connections++;
-            }
-          }
-        }
-
-        linePosAttr.needsUpdate = true;
-        lineColAttr.needsUpdate = true;
-        lineGeometry.setDrawRange(0, connections * 2);
-
-        renderer.render(scene, camera);
-      }
-
-      animate();
-
-      // Soft fade-in background canvas
-      setTimeout(() => {
-        canvas.style.opacity = '0.55';
-      }, 100);
-    }
-
-    // 2. WebGL Interactive AI Sphere Effect (Hero section)
-    function initWebGLHero() {
-      const canvas = document.getElementById('hero-3d-canvas');
-      const hintBadge = document.getElementById('hero-3d-hint');
-      const cardContainer = document.getElementById('hero-interactive-card');
-      if (!canvas || !cardContainer) return;
-
-      const rect = canvas.getBoundingClientRect();
-      const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        alpha: true,
-        antialias: true,
-        powerPreference: 'high-performance'
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(rect.width, rect.height);
-
-      const scene = new THREE.Scene();
-      
-      const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 100);
-      camera.position.z = 3.6;
-
-      // Group to hold particles
-      const group = new THREE.Group();
-      scene.add(group);
-
-      // Generate a sphere cloud of brilliant particles (representing neural nodes)
-      const particleCount = 220;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const originalPositions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-
-      const palette = [
-        new THREE.Color(0x06b6d4), // Cyan
-        new THREE.Color(0xd946ef), // Magenta
-        new THREE.Color(0xf59e0b)  // Yellow-gold
-      ];
-
-      for (let i = 0; i < particleCount; i++) {
-        const idx = i * 3;
-        
-        // Random spherical distribution
-        const u = Math.random();
-        const v = Math.random();
-        const theta = u * 2 * Math.PI;
-        const phi = Math.acos(2 * v - 1);
-        
-        // Radius variation to create a hollow sphere layer
-        const r = 0.95 + Math.random() * 0.4;
-        
-        const x = r * Math.sin(phi) * Math.cos(theta);
-        const y = r * Math.sin(phi) * Math.sin(theta);
-        const z = r * Math.cos(phi);
-
-        positions[idx] = x;
-        positions[idx + 1] = y;
-        positions[idx + 2] = z;
-
-        // Backup original coordinates for physics calculation and sine wave pulsing
-        originalPositions[idx] = x;
-        originalPositions[idx + 1] = y;
-        originalPositions[idx + 2] = z;
-
-        // Map random palette colors to vertices
-        const clr = palette[Math.floor(Math.random() * palette.length)];
-        colors[idx] = clr.r;
-        colors[idx + 1] = clr.g;
-        colors[idx + 2] = clr.b;
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      // Point material with glowing additive blending properties
-      const material = new THREE.PointsMaterial({
-        size: 0.05,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-
-      const points = new THREE.Points(geometry, material);
-      group.add(points);
-
-      // Interactive variables
-      const mouse = { x: 0, y: 0, active: false };
-      const targetMouse = { x: 0, y: 0 };
-      
-      let targetRotationX = 0;
-      let targetRotationY = 0;
-      let rotationX = 0;
-      let rotationY = 0;
-      let isDragging = false;
-      let previousMousePosition = { x: 0, y: 0 };
-
-      // Pointer event controls
-      const startDrag = (clientX, clientY) => {
-        isDragging = true;
-        previousMousePosition = { x: clientX, y: clientY };
-      };
-
-      const moveDrag = (clientX, clientY) => {
-        if (isDragging) {
-          const deltaX = clientX - previousMousePosition.x;
-          const deltaY = clientY - previousMousePosition.y;
-
-          targetRotationY += deltaX * 0.007;
-          targetRotationX += deltaY * 0.007;
-
-          previousMousePosition = { x: clientX, y: clientY };
-        }
-      };
-
-      const stopDrag = () => {
-        isDragging = false;
-      };
-
-      canvas.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
-      window.addEventListener('mousemove', (e) => {
-        moveDrag(e.clientX, e.clientY);
-        
-        // Track local coordinates of mouse relative to card
-        const cardRect = cardContainer.getBoundingClientRect();
-        if (e.clientX >= cardRect.left && e.clientX <= cardRect.right &&
-            e.clientY >= cardRect.top && e.clientY <= cardRect.bottom) {
-          
-          mouse.active = true;
-          // Normalize to (-1 to +1) inside the card
-          targetMouse.x = ((e.clientX - cardRect.left) / cardRect.width) * 2 - 1;
-          targetMouse.y = -((e.clientY - cardRect.top) / cardRect.height) * 2 + 1;
-        } else {
-          mouse.active = false;
-        }
-      });
-      window.addEventListener('mouseup', stopDrag);
-
-      // Touch events support
-      canvas.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          startDrag(e.touches[0].clientX, e.touches[0].clientY);
-          mouse.active = true;
-          const cardRect = cardContainer.getBoundingClientRect();
-          targetMouse.x = ((e.touches[0].clientX - cardRect.left) / cardRect.width) * 2 - 1;
-          targetMouse.y = -((e.touches[0].clientY - cardRect.top) / cardRect.height) * 2 + 1;
-        }
-      });
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 1) {
-          moveDrag(e.touches[0].clientX, e.touches[0].clientY);
-          const cardRect = cardContainer.getBoundingClientRect();
-          targetMouse.x = ((e.touches[0].clientX - cardRect.left) / cardRect.width) * 2 - 1;
-          targetMouse.y = -((e.touches[0].clientY - cardRect.top) / cardRect.height) * 2 + 1;
-        }
-      });
-      window.addEventListener('touchend', () => {
-        stopDrag();
-        mouse.active = false;
-      });
-
-      // Resize observer to scale render viewport responsively
-      const resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          const { width, height } = entry.contentRect;
-          if (width > 0 && height > 0) {
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-          }
-        }
-      });
-      resizeObserver.observe(canvas.parentElement);
-
-      // Intersection Observer for Hero Visibility Loop
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          isHeroActive = entry.isIntersecting;
-        });
-      }, { threshold: 0.1 });
-      heroObserver.observe(canvas);
-
-      const clock = new THREE.Clock();
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        // Visibility Safeguard
-        if (!isPageVisible || !isHeroActive) return;
-
-        const time = clock.getElapsedTime();
-
-        // Smooth mouse coords interpolation
-        mouse.x += (targetMouse.x - mouse.x) * 0.1;
-        mouse.y += (targetMouse.y - mouse.y) * 0.1;
-
-        // Project mouse vector to 3D space near target coordinate depth Z=0
-        const raycaster = new THREE.Raycaster();
-        const tempMouse = new THREE.Vector2(mouse.x, mouse.y);
-        raycaster.setFromCamera(tempMouse, camera);
-        
-        // Find point of intersection with Z = 0 plane
-        const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-        const mouse3D = new THREE.Vector3();
-        raycaster.ray.intersectPlane(plane, mouse3D);
-
-        // Convert mouse position from world coordinates to local coordinate of the points group
-        const localMouse = group.worldToLocal(mouse3D.clone());
-
-        // Apply physical sine deformation & magnetic mouse attraction to points
-        const posAttr = points.geometry.attributes.position;
-        const origArray = originalPositions;
-        const posArray = posAttr.array;
-
-        for (let i = 0; i < posAttr.count; i++) {
-          const idx = i * 3;
-          let px = origArray[idx];
-          let py = origArray[idx + 1];
-          let pz = origArray[idx + 2];
-
-          // Compute distance of original position from center to get normal direction
-          const len = Math.sqrt(px*px + py*py + pz*pz);
-          const nx = px / len;
-          const ny = py / len;
-          const nz = pz / len;
-
-          // Standard orbital pulsing noise
-          const wave = Math.sin(nx * 3.0 + time * 1.2) * Math.cos(ny * 3.0 + time * 1.2) * Math.sin(nz * 3.0 + time * 1.2);
-          let deformFactor = 1.0 + wave * 0.08;
-
-          px *= deformFactor;
-          py *= deformFactor;
-          pz *= deformFactor;
-
-          // Magnetic attraction: pull points near mouse coordinate inside the cloud
-          if (mouse.active) {
-            const dx = px - localMouse.x;
-            const dy = py - localMouse.y;
-            const dz = pz - localMouse.z;
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            
-            if (dist < 1.0) {
-              const pull = (1.0 - dist) * 0.25;
-              px -= dx * pull;
-              py -= dy * pull;
-              pz -= dz * pull;
-            }
-          }
-
-          posArray[idx] = px;
-          posArray[idx + 1] = py;
-          posArray[idx + 2] = pz;
-        }
-        posAttr.needsUpdate = true;
-
-        // Rotations damping & Damping physics
-        rotationX += (targetRotationX - rotationX) * 0.08;
-        rotationY += (targetRotationY - rotationY) * 0.08;
-        
-        group.rotation.x = rotationX;
-        group.rotation.y = rotationY;
-
-        if (!isDragging) {
-          targetRotationY += 0.0025;
-          targetRotationX = Math.sin(time * 0.25) * 0.15;
-        }
-
-        renderer.render(scene, camera);
-      }
-
-      animate();
-
-      // Progressive Enhancement transition: Fade in WebGL canvas and show interactive hint badge
-      setTimeout(() => {
-        canvas.style.opacity = '1';
-        if (hintBadge) hintBadge.style.opacity = '1';
-      }, 100);
-    }
-
-    // 3. Original Page Dynamic Interactions (Scroll, Cursor, Tilt, FAQ)
-    // Cursor Glow and Grid Interaction
+    // Interações da página: reveal, cursor sutil, FAQ com animação de altura
     const cursorGlow = document.getElementById('cursor-glow');
-    document.addEventListener('mousemove', (e) => {
-      const { clientX, clientY } = e;
-      
-      // Update cursor glow position
-      cursorGlow.style.left = `${clientX}px`;
-      cursorGlow.style.top = `${clientY}px`;
-      cursorGlow.style.opacity = '1';
-
-      // Update grid mask position
-      const xPercent = (clientX / window.innerWidth) * 100;
-      const yPercent = (clientY / window.innerHeight) * 100;
-      document.documentElement.style.setProperty('--mouse-x', `${xPercent}%`);
-      document.documentElement.style.setProperty('--mouse-y', `${yPercent}%`);
-
-      // Parallax Orbs
-      const orbs = document.querySelectorAll('.orb');
-      orbs.forEach((orb, index) => {
-        const speed = (index + 1) * 0.02;
-        const x = (window.innerWidth - clientX * speed) / 100;
-        const y = (window.innerHeight - clientY * speed) / 100;
-        orb.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    });
-
-    // 3D Tilt Effect for static elements
-    const tiltElements = document.querySelectorAll('.tilt-element');
-    tiltElements.forEach(el => {
-      el.addEventListener('mousemove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (centerY - y) / 10;
-        const rotateY = (x - centerX) / 10;
-        
-        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
-
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-      });
-    });
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    if (cursorGlow && finePointer) {
+      let glowRaf = null;
+      let glowX = 0;
+      let glowY = 0;
+      document.addEventListener('mousemove', (e) => {
+        glowX = e.clientX;
+        glowY = e.clientY;
+        if (!glowRaf) {
+          glowRaf = requestAnimationFrame(() => {
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            cursorGlow.style.opacity = '1';
+            document.documentElement.style.setProperty('--mouse-x', ((glowX / window.innerWidth) * 100) + '%');
+            document.documentElement.style.setProperty('--mouse-y', ((glowY / window.innerHeight) * 100) + '%');
+            glowRaf = null;
+          });
+        }
+      }, { passive: true });
+    }
 
     // Reveal on Scroll
-    const observerOptions = {
-      threshold: 0.15
-    };
-
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // FAQ Accordion
+    // FAQ Accordion (animated height)
     const faqToggles = document.querySelectorAll('.faq-toggle');
     faqToggles.forEach(toggle => {
       toggle.addEventListener('click', () => {
-        const answerId = toggle.getAttribute('aria-controls');
-        const answer = document.getElementById(answerId);
+        const answer = document.getElementById(toggle.getAttribute('aria-controls'));
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        
-        // Toggle current item
-        toggle.setAttribute('aria-expanded', !isExpanded);
-        answer.classList.toggle('hidden');
-        
-        // Rotate chevron
-        const chevron = toggle.querySelector('svg');
-        chevron.classList.toggle('rotate-180');
+        faqToggles.forEach(other => {
+          if (other !== toggle) {
+            other.setAttribute('aria-expanded', 'false');
+            document.getElementById(other.getAttribute('aria-controls')).classList.remove('open');
+          }
+        });
+        toggle.setAttribute('aria-expanded', String(!isExpanded));
+        answer.classList.toggle('open', !isExpanded);
       });
     });
   </script>
 
-  <footer class="mt-20 py-10 bg-white/60 backdrop-blur-md border-t border-white/50">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+  <footer class="mt-14 py-10 bg-white border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
 
       <!-- Brand & Copyright -->
-      <div class="flex flex-col items-center md:items-start gap-2">
-        <div class="flex items-center gap-3 opacity-90">
-          <img src="public/images/logo-comunidade.webp" alt="Logo da Inteligência Versátil"
-            class="w-8 h-8 rounded-full border border-slate-200 shadow-sm" loading="lazy">
-          <span class="font-display text-base font-bold text-slate-700 tracking-wide">Inteligência Versátil</span>
-        </div>
-        <div class="text-xs text-slate-500 font-medium md:pl-11">
-          &copy; 2026 Todos os direitos reservados.
+      <div class="flex items-center gap-3">
+        <img src="public/images/logo-comunidade.webp" alt="Logo da Inteligência Versátil"
+          class="w-8 h-8 rounded-full border border-slate-200 shadow-sm" loading="lazy" width="32" height="32">
+        <div>
+          <p class="font-display text-sm font-bold text-slate-900">Inteligência Versátil</p>
+          <p class="text-xs text-slate-500">&copy; 2026 Todos os direitos reservados.</p>
         </div>
       </div>
 
       <!-- Agency Badge -->
       <a href="https://www.inkpage.com.br" target="_blank" rel="noopener"
-        class="group relative flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50/50 hover:bg-white border border-slate-200/60 hover:border-purple-200/60 shadow-sm hover:shadow-lg hover:shadow-purple-100/50 transition-all duration-300 overflow-hidden">
-
-        <!-- Visual Shine Effect -->
-        <div
-          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform ease-in-out">
-        </div>
-
-        <div class="flex flex-col items-end relative z-10">
-          <span
-            class="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest group-hover:text-purple-600 transition-colors duration-300">
-            Presença Digital
-          </span>
-          <span
-            class="font-display text-sm font-bold text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-fuchsia-600 transition-all duration-300 leading-tight">
-            Inkpage
-          </span>
-        </div>
-
-        <div
-          class="relative w-9 h-9 rounded-lg bg-slate-100 border border-slate-200/50 group-hover:border-purple-200 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-fuchsia-600 flex items-center justify-center transition-all duration-300 shadow-inner group-hover:shadow-lg z-10">
+        class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-white border border-slate-200 transition-colors">
+        <span class="text-right leading-tight">
+          <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Presença Digital</span>
+          <span class="block font-display text-sm font-bold text-slate-700">Inkpage</span>
+        </span>
+        <span class="w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center">
           <img src="public/images/logo-inkpage.svg" alt="Logo Inkpage - Agência Digital"
-            class="w-5 h-5 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-0 group-hover:invert transition-all duration-300">
-        </div>
+            class="w-5 h-5 opacity-60" loading="lazy">
+        </span>
       </a>
 
     </div>

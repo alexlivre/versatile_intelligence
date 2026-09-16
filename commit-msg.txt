@@ -1,0 +1,8 @@
+refactor: redesign landing page and remove Rafael references
+
+- Remove leadership dossier section, Twitter embed, and personal schema data
+- Replace WebGL hero with WhatsApp conversation proof and clear CTAs
+- Flatten visual system to single emerald accent and solid cards
+- Simplify FAQ, add final CTA, sticky mobile CTA, skip link, and focus styles
+
+Co-authored-by: CommandCodeBot <noreply@commandcode.ai>
